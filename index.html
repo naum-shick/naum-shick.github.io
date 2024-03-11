@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Sugnature Page</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Signature Page Ver.04</h1>
+
+      <div class="main">
+        <div class="main-section">
+          <select id="employeeList">
+            <option class="listItem">List</option>
+          </select>
+        </div>
+
+        <div class="main-section">
+          <canvas id="signatureCanvas" width="800" height="400"></canvas>
+        </div>
+
+        <div class="main-section">
+          <button id="saveSignatureBtn" class="btn" onclick="saveSignature()">
+            Save
+          </button>
+        </div>
+      </div>
+
+      <div class="side">
+        <button id="clearCanvasBtn" class="btn" onclick="clearCanvas()">
+          X
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

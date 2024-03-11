@@ -1,0 +1,136 @@
+* {
+  font-family: Inter, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  background-color: #ececec;
+}
+
+.container {
+  padding: 2.5rem;
+  /* border: 2px solid black; */
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: rgb(25, 103, 210);
+  text-align: center;
+}
+
+.main {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  gap: 35px;
+}
+.main-section {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+#employeeList {
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 400px;
+  text-align: left;
+  padding: 0.8rem 1.2rem;
+  white-space: nowrap;
+  border-radius: 0.8rem;
+  background-color: #afe1ff;
+  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  border: 0;
+  transition: box-shadow 0.2s;
+}
+
+#employeeList:hover {
+  box-shadow: #3d3d3d 0 0 0 3px, transparent 0 0 0 0;
+}
+
+#signatureCanvas {
+  border-radius: 0.8rem;
+  border: 3px solid #3d3d3d;
+}
+
+.btn {
+  width: 150px;
+  align-items: center;
+  background-color: #afe1ff;
+  border-radius: 0.8rem;
+  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
+  color: #121212;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-size: 1.2rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+  border: 0;
+  white-space: nowrap;
+}
+.btn:hover {
+  box-shadow: #3d3d3d 0 0 0 3px, transparent 0 0 0 0;
+}
+
+.side {
+  position: absolute;
+  right: 1rem;
+  top: 11rem;
+}
+
+#clearCanvasBtn {
+  width: 52px;
+  border-radius: 2rem;
+  background-color: #e26767;
+}
+#saveSignatureBtn {
+  background-color: #86e267;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 2.5rem 0.5rem;
+  }
+  .side {
+    right: 5rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .container {
+    padding: 2.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 2.5rem 0.5rem;
+  }
+
+  #employeeList {
+    width: 100%;
+  }
+  .side {
+    right: 50%;
+    transform: translate(50%);
+    /* top: calc(100vh - 5rem); */
+    top: unset;
+    bottom: 5rem;
+  }
+}
