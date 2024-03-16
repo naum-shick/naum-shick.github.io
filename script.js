@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 2017
+ *
+ * Script for:
+ * - get namelist from google sheet (publish script)
+ * - select name
+ * - make signature
+ * - save signature in google sheet
+ *
+ * @summary make signature and save in google sheet
+ * @author Yana Shick, Naum Shick
+ *
+ * Created at     : 2024-03-14
+ * Last modified  : 2024-03-14
+ */
+
 const canvas = document.getElementById("signatureCanvas");
 const ctx = canvas.getContext("2d");
 const strokeSize = 5;
@@ -88,23 +104,26 @@ function adjustCanvas() {
   }
 }
 
-const URL =
-  "https://script.google.com/macros/s/AKfycbyHrrbgQx2Opd1zsm3GhHwFzvqDWAZ9PWqFTx7hsT-EyGc5ZFgvGnqtIEE8y38UPD7B/exec"
-
+// make fetch url from command line
+const paramsString = window.location.href;
+const url = new URL(paramsString);
+const params = url.searchParams.get("q");
+const fetch_URL = `https://script.google.com/macros/s/${params}/exec`;
 
 async function saveSignature() {
   const dataURL = canvas.toDataURL();
   const formData = new FormData();
   formData.append("Signature", dataURL);
-  const employee = document.getElementById("employeeList").value;
+  const employee = $("#employeeList").val();
   formData.append("Employee", employee);
-  const res = await fetch(URL, {
+  const res = await fetch(fetch_URL, {
     method: "POST",
     body: formData,
   });
   const data = await res.json();
   if (data.result === "success") {
     clearCanvas();
+    $("#employeeList").val("");
     console.log(data);
     alert("Signature is done successfully");
   } else {
@@ -114,22 +133,56 @@ async function saveSignature() {
 }
 
 async function getList() {
-  //   console.log(`i am in`);
   const formData = new FormData();
   formData.append("getList", "getList");
-  const res = await fetch(URL, {
+  const res = await fetch(fetch_URL, {
     method: "POST",
     body: formData,
   });
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
   if (data.row !== undefined) {
-    data.row.forEach((element) => {
-      let newOption = document.createElement("option");
-      newOption.setAttribute("value", element);
-      newOption.setAttribute("class", "listItem");
-      newOption.innerHTML = element;
-      document.getElementById("employeeList").appendChild(newOption);
-    });
+    namesMatcher(data.row);
+
+    // after load - convert "Loading..." to work typeahead imput
+
+    $("#employeeList").removeAttr("disabled");
+    $("#employeeList").addClass("typeahead-enabled");
+    $(".typeahead").css("background-color", "#afe1ff");
+    $("#employeeList").attr("placeholder", "Type a name");
   }
+}
+
+function namesMatcher(listNames) {
+  const substringMatcher = function (strs) {
+    return function findMatches(q, cb) {
+      // an array that will be populated with substring matches
+      var matches = [];
+      // regex used to determine if a string contains the substring `q`
+      var substringRegex = new RegExp(q, "i");
+      // iterate through the pool of strings and for any string that
+      // contains the substring `q`, add it to the `matches` array
+      $.each(strs, function (i, str) {
+        if (substringRegex.test(str)) {
+          ////matches.push({ value: str }); ////?????
+          matches.push(str);
+        }
+      });
+      console.log(matches);
+      cb(matches);
+    };
+  };
+
+  $("#scrollable-dropdown-menu .typeahead").typeahead(
+    {
+      hint: true,
+      highlight: true,
+      minLength: 2,
+    },
+    {
+      name: "listNames",
+      limit: 10,
+      source: substringMatcher(listNames),
+    }
+  );
 }

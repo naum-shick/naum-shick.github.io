@@ -3,23 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Signature Demo</title>
-	<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+    <title>Signature Page</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"
+      integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj+KsslFkCOt3TvJrX2AV/Gc3wOqA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"
+      integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Signature Page Ver 0.5</h1>
+      <h1>Signature Page Ver.07</h1>
 
       <div class="main">
         <div class="main-section">
-          <select id="employeeList">
-            <option class="listItem">List</option>
-          </select>
+          <div id="scrollable-dropdown-menu">
+            <input
+              class="typeahead"
+              id="employeeList"
+              type="text"
+              placeholder="Loading..."
+              disabled
+            />
+          </div>
         </div>
 
         <div class="main-section">
@@ -39,6 +56,7 @@
         </button>
       </div>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -36,25 +36,56 @@ h1 {
   text-align: center;
   width: 100%;
 }
-#employeeList {
+
+/* ----------------------------------------------------------- */
+
+.typeahead {
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 600;
   width: 400px;
   text-align: left;
   padding: 0.8rem 1.2rem;
   white-space: nowrap;
   border-radius: 0.8rem;
-  background-color: #afe1ff;
   box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
   box-sizing: border-box;
   color: #121212;
   border: 0;
-  transition: box-shadow 0.2s;
+  background-color: #ffb7af;
 }
-
-#employeeList:hover {
+.twitter-typeahead {
+  width: 400px;
+}
+.typeahead-enabled:hover {
+  transition: box-shadow 0.2s;
   box-shadow: #3d3d3d 0 0 0 3px, transparent 0 0 0 0;
 }
+
+.tt-hint {
+  color: #8c8c8c;
+}
+.typeahead:focus {
+  outline: none;
+}
+
+.tt-menu {
+  background-color: #afe1ff;
+  text-align: left;
+  width: 400px;
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+.tt-menu div {
+  margin: 0.5rem;
+  font-size: 1.2rem;
+}
+
+#scrollable-dropdown-menu .tt-menu {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* ----------------------------------------------------------- */
 
 #signatureCanvas {
   border-radius: 0.8rem;
@@ -122,14 +153,19 @@ h1 {
   .container {
     padding: 2.5rem 0.5rem;
   }
-
-  #employeeList {
+  .twitter-typeahead {
     width: 100%;
   }
+  .typeahead {
+    width: 100%;
+  }
+  .tt-dropdown-menu {
+    width: 100%;
+  }
+
   .side {
     right: 50%;
     transform: translate(50%);
-    /* top: calc(100vh - 5rem); */
     top: unset;
     bottom: 5rem;
   }
