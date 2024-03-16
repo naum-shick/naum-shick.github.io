@@ -1,11 +1,17 @@
 // Original code from https://github.com/jamiewilson/form-to-google-sheets
 // Updated for 2021 and ES6 standards
 
-const sheetName = 'Sign'
+const sheetNamePrefix = 'Sign '
 const scriptProp = PropertiesService.getScriptProperties()
 
+function test() {
+  const obj = {};
+  obj.parameter = ["getList"];
+  const res = doPost(obj);
+  console.log(res);
+}
 
-
+// save current table in property
 function initialSetup() {
   const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
   scriptProp.setProperty('key', activeSpreadsheet.getId())
@@ -26,7 +32,8 @@ function doPost(e) {
 
     if (e.parameter["getList"]) {
 
-      const sheetList = doc.getSheetByName('NameList');
+      const ssName = SpreadsheetApp.openById("1xDqGouT9ySKS_4JDz8eq4LbHsJ6udrlgrPLcDWCx2Ag"); // open shared name list, sign in
+      const sheetList = ssName.getSheetByName('sign in');
 
       const listEmployees = sheetList.getRange(2, 1, sheetList.getLastRow() - 1, 1).getValues();
       const listEmployees2 = listEmployees.map((val) => {
@@ -38,7 +45,14 @@ function doPost(e) {
 
 
     } else {
-      const sheet = doc.getSheetByName(sheetName);
+      const sheetName = sheetNamePrefix + (new Date()).toISOString().split('T')[0];
+      var sheet = doc.getSheetByName(sheetName);
+      if (!sheet) {
+        sheet = doc.insertSheet( sheetName);
+        sheet.appendRow(["Date", "Employee", "Signature"]);
+      }
+
+
       const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
       const nextRow = sheet.getLastRow() + 1
 
@@ -61,6 +75,7 @@ function doPost(e) {
 
 
   catch (e) {
+    console.log(e);
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
       .setMimeType(ContentService.MimeType.JSON)

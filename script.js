@@ -124,10 +124,10 @@ async function saveSignature() {
   if (data.result === "success") {
     clearCanvas();
     $("#employeeList").val("");
-    console.log(data);
+    ////console.log(data);
     alert("Signature is done successfully");
   } else {
-    console.log(data);
+    ////console.log(data);
     alert("Error");
   }
 }
@@ -168,7 +168,6 @@ function namesMatcher(listNames) {
           matches.push(str);
         }
       });
-      console.log(matches);
       cb(matches);
     };
   };
