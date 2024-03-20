@@ -9,8 +9,8 @@
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"
-      integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj+KsslFkCOt3TvJrX2AV/Gc3wOqA=="
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
@@ -20,11 +20,24 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+      integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
+      integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Signature Page Ver.08</h1>
+      <h1>Signature Page Ver .09</h1>
 
       <div class="main">
         <div class="main-section">
@@ -40,12 +53,19 @@
         </div>
 
         <div class="main-section">
+          <input type="text" class="datepicker" id="datepicker" />
+        </div>
+
+        <div class="main-section">
           <canvas id="signatureCanvas" width="800" height="400"></canvas>
         </div>
 
         <div class="main-section">
-          <button id="saveSignatureBtn" class="btn" onclick="saveSignature()">
-            Save
+          <button id="saveSignatureBtn1" class="btn" onclick="saveSignature(1)">
+            Save 1
+          </button>
+          <button id="saveSignatureBtn2" class="btn" onclick="saveSignature(2)">
+            Save 2
           </button>
         </div>
       </div>
@@ -54,6 +74,18 @@
         <button id="clearCanvasBtn" class="btn" onclick="clearCanvas()">
           X
         </button>
+      </div>
+
+      <div class="main-section">
+        <img
+          id="photo"
+          alt="Photo"
+          loading="lazy"
+          width="256px"
+          height="256px"
+          src=""
+          style="width: 256px; height: 256px"
+        />
       </div>
     </div>
 

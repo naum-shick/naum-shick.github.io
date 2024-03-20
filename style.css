@@ -39,7 +39,8 @@ h1 {
 
 /* ----------------------------------------------------------- */
 
-.typeahead {
+.typeahead,
+.datepicker {
   font-size: 1.2rem;
   font-weight: 600;
   width: 400px;
@@ -130,7 +131,8 @@ h1 {
   border-radius: 2rem;
   background-color: #e26767;
 }
-#saveSignatureBtn {
+#saveSignatureBtn1,
+#saveSignatureBtn2 {
   background-color: #86e267;
 }
 
@@ -168,5 +170,9 @@ h1 {
     transform: translate(50%);
     top: unset;
     bottom: 5rem;
+  }
+
+  img {
+    border: 2px solid #555;
   }
 }

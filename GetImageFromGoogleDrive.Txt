@@ -1,0 +1,11 @@
+https://stackoverflow.com/questions/50664868/get-pictures-from-google-drive-folder-with-javascript-to-my-website
+3
+
+Hosting resources from Google Drive has long been discontinued, but for the images, you can try using the Files: get to fetch the webContentLink which you can then display in your img src like:
+
+< img src="https://drive.google.com/uc?id=FILE_ID_HERE&export=download" >
+
+https://stackoverflow.com/questions/64132595/get-image-url-from-google-drive-to-google-sheet-based-on-file-name
+
+
+

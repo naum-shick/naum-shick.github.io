@@ -11,7 +11,7 @@
  * @author Yana Shick, Naum Shick
  *
  * Created at     : 2024-03-14
- * Last modified  : 2024-03-14
+ * Last modified  : 2024-03-19
  */
 
 const canvas = document.getElementById("signatureCanvas");
@@ -110,12 +110,23 @@ const url = new URL(paramsString);
 const params = url.searchParams.get("q");
 const fetch_URL = `https://script.google.com/macros/s/${params}/exec`;
 
-async function saveSignature() {
+async function saveSignature(shift) {
   const dataURL = canvas.toDataURL();
+
   const formData = new FormData();
   formData.append("Signature", dataURL);
+
   const employee = $("#employeeList").val();
   formData.append("Employee", employee);
+
+  var signDate = $("#datepicker")
+    .datepicker("getDate")
+    .toISOString()
+    .split("T")[0]; //format yyyy-mm-dd
+  formData.append("SignDate", signDate);
+
+  formData.append("Shift", shift);
+
   const res = await fetch(fetch_URL, {
     method: "POST",
     body: formData,
@@ -124,10 +135,10 @@ async function saveSignature() {
   if (data.result === "success") {
     clearCanvas();
     $("#employeeList").val("");
-    ////console.log(data);
+    console.log(data);
     alert("Signature is done successfully");
   } else {
-    ////console.log(data);
+    console.log(data);
     alert("Error");
   }
 }
@@ -149,6 +160,7 @@ async function getList() {
     $("#employeeList").removeAttr("disabled");
     $("#employeeList").addClass("typeahead-enabled");
     $(".typeahead").css("background-color", "#afe1ff");
+    $(".datepicker").css("background-color", "#afe1ff");
     $("#employeeList").attr("placeholder", "Type a name");
   }
 }
@@ -162,26 +174,46 @@ function namesMatcher(listNames) {
       var substringRegex = new RegExp(q, "i");
       // iterate through the pool of strings and for any string that
       // contains the substring `q`, add it to the `matches` array
-      $.each(strs, function (i, str) {
+      $.each(strs, function (_i, str) {
         if (substringRegex.test(str)) {
           ////matches.push({ value: str }); ////?????
           matches.push(str);
         }
       });
+      //console.log(matches);
       cb(matches);
     };
   };
 
-  $("#scrollable-dropdown-menu .typeahead").typeahead(
-    {
-      hint: true,
-      highlight: true,
-      minLength: 2,
-    },
-    {
-      name: "listNames",
-      limit: 10,
-      source: substringMatcher(listNames),
-    }
-  );
+  $("#scrollable-dropdown-menu .typeahead")
+    .typeahead(
+      {
+        hint: true,
+        highlight: true,
+        minLength: 1,
+      },
+      {
+        name: "listNames",
+        limit: 10,
+        source: substringMatcher(listNames),
+      }
+    )
+    .bind("typeahead:selected", function (_obj, datum, _name) {
+      setImage(datum);
+    });
+
+  //datepicker
+  $(function () {
+    $("#datepicker")
+      .datepicker({
+        minDate: "-1m",
+        maxDate: "1d",
+      })
+      .datepicker("setDate", "0d"); // today
+  });
+
+  function setImage(name) {
+    const url = "Avatar/" + name.replace(" ", "%20") + ".jpg";
+    $("#photo").attr("src", url);
+  }
 }
