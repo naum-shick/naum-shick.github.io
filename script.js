@@ -83,15 +83,15 @@ function stopDrawing() {
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
+300;
 function adjustCanvas() {
   if (window.innerWidth > 1200) {
     canvas.setAttribute("width", "800");
-    canvas.setAttribute("height", "400");
+    canvas.setAttribute("height", "300");
   }
   if (window.innerWidth <= 1200 && window.innerWidth > 980) {
     canvas.setAttribute("width", "650");
-    canvas.setAttribute("height", "325");
+    canvas.setAttribute("height", "280");
   }
   if (window.innerWidth <= 980 && window.innerWidth > 480) {
     canvas.setAttribute("width", "500");
@@ -153,7 +153,7 @@ async function getList() {
     body: formData,
   });
   const data = await res.json();
-  console.log(data);
+  ////console.log(data);
   if (data.row !== undefined) {
     nameImages = data.row;
     const listNames = nameImages.map((val) => val.name);
@@ -180,7 +180,6 @@ function namesMatcher(listNames) {
       // contains the substring `q`, add it to the `matches` array
       $.each(strs, function (_i, str) {
         if (substringRegex.test(str)) {
-          ////matches.push({ value: str }); ////?????
           matches.push(str);
         }
       });
