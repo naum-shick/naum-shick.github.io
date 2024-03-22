@@ -109,6 +109,9 @@ const paramsString = window.location.href;
 const url = new URL(paramsString);
 const params = url.searchParams.get("q");
 const fetch_URL = `https://script.google.com/macros/s/${params}/exec`;
+const imageUrl = "https://drive.google.com/thumbnail?id=#&sz=w1000";
+
+let nameImages;
 
 async function saveSignature(shift) {
   const dataURL = canvas.toDataURL();
@@ -151,9 +154,11 @@ async function getList() {
     body: formData,
   });
   const data = await res.json();
-  //console.log(data);
+  console.log(data);
   if (data.row !== undefined) {
-    namesMatcher(data.row);
+    nameImages = data.row;
+    const listNames = nameImages.map((val) => val.name);
+    namesMatcher(listNames);
 
     // after load - convert "Loading..." to work typeahead imput
 
@@ -213,7 +218,11 @@ function namesMatcher(listNames) {
   });
 
   function setImage(name) {
-    const url = "Avatar/" + name.replace(" ", "%20") + ".jpg";
-    $("#photo").attr("src", url);
+    const ni = nameImages.find((x) => x.name == name);
+    if (ni != undefined) {
+      const url = imageUrl.replace("#", ni.imageId);
+      console.log(url);
+      $("#photo").attr("src", url);
+    }
   }
 }
