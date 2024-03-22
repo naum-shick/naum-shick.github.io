@@ -17,7 +17,9 @@ body {
   margin: 0 auto;
 }
 
-h1 {
+h1,
+h2,
+h3 {
   color: rgb(25, 103, 210);
   text-align: center;
 }
@@ -38,9 +40,12 @@ h1 {
 }
 
 /* ----------------------------------------------------------- */
+.name-data {
+  display: flex;
+  justify-content: center;
+}
 
-.typeahead,
-.datepicker {
+.typeahead {
   font-size: 1.2rem;
   font-weight: 600;
   width: 400px;
@@ -54,6 +59,22 @@ h1 {
   border: 0;
   background-color: #ffb7af;
 }
+
+.datepicker {
+  font-size: 1.2rem;
+  font-weight: 600;
+  width: 150px;
+  text-align: left;
+  padding: 0.8rem 1.2rem;
+  white-space: nowrap;
+  border-radius: 0.8rem;
+  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  border: 0;
+  background-color: #ffb7af;
+}
+
 .twitter-typeahead {
   width: 400px;
 }

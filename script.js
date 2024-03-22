@@ -122,10 +122,8 @@ async function saveSignature(shift) {
   const employee = $("#employeeList").val();
   formData.append("Employee", employee);
 
-  var signDate = $("#datepicker")
-    .datepicker("getDate")
-    .toISOString()
-    .split("T")[0]; //format yyyy-mm-dd
+  const signDate = $("#datepicker").val(); // string with original format
+
   formData.append("SignDate", signDate);
 
   formData.append("Shift", shift);
@@ -134,6 +132,7 @@ async function saveSignature(shift) {
     method: "POST",
     body: formData,
   });
+
   const data = await res.json();
   if (data.result === "success") {
     clearCanvas();
@@ -219,10 +218,12 @@ function namesMatcher(listNames) {
 
   function setImage(name) {
     const ni = nameImages.find((x) => x.name == name);
-    if (ni != undefined) {
+    if (ni.imageId != undefined) {
       const url = imageUrl.replace("#", ni.imageId);
       console.log(url);
       $("#photo").attr("src", url);
+    } else {
+      $("#photo").attr("src", "default.jpg");
     }
   }
 }
