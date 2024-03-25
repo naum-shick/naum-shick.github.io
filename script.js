@@ -159,12 +159,14 @@ async function getList() {
     const listNames = nameImages.map((val) => val.name);
     namesMatcher(listNames);
 
+    // // // {
+    // // //   const listNames = ["aaa", "asdd", "asd", "bbb"];
+    // // //   namesMatcher(listNames);
+
     // after load - convert "Loading..." to work typeahead imput
 
     $("#employeeList").removeAttr("disabled");
     $("#employeeList").addClass("typeahead-enabled");
-    $(".typeahead").css("background-color", "#afe1ff");
-    $(".datepicker").css("background-color", "#afe1ff");
     $("#employeeList").attr("placeholder", "Type a name");
   }
 }

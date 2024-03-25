@@ -9,6 +9,7 @@ function test() {
   obj.parameter = ["getList"];
   const res = doPost(obj);
   console.log(res);
+  Logger.log(res);
 }
 
 // save current table in property
@@ -31,51 +32,50 @@ function doPost(e) {
     let resToSend = "";
 
     if (e.parameter["getList"]) {
+    //if (true) {
 
-      const ssName = SpreadsheetApp.openById("1xDqGouT9ySKS_4JDz8eq4LbHsJ6udrlgrPLcDWCx2Ag"); // open shared name list, sign in
+      const ssName = SpreadsheetApp.openById("1xDqGouT9ySKS_4JDz8eq4LbHsJ6udrlgrPLcDWCx2Ag"); // open shared name list
       const sheetList = ssName.getSheetByName('sign in');
 
       const listEmployees = sheetList.getRange(2, 1, sheetList.getLastRow() - 1, 1).getValues();
-      const listEmployees2 = listEmployees.map((val) => {
-        return val.toString();
+
+      const nameImages = getImages();
+
+      const listNamesImageId = listEmployees.map((val) => {
+        const name = val.toString().trim();
+        imageId = nameImages[name];
+        return { name: name, imageId: imageId };
       });
-      // const listToSend = JSON.stringify(listEmployees2);
 
-      resToSend = listEmployees2;
+      resToSend = listNamesImageId;
 
+      Logger.log(JSON.stringify(resToSend));
 
     } else {
-      const sheetName = sheetNamePrefix + (new Date()).toISOString().split('T')[0];
+      const sheetName = sheetNamePrefix + e.parameter["SignDate"] + " Shift " + e.parameter["Shift"];
+
+      console.log(e.parameter);
+      console.log(sheetName);
+
       var sheet = doc.getSheetByName(sheetName);
       if (!sheet) {
-        sheet = doc.insertSheet( sheetName);
+        sheet = doc.insertSheet(sheetName);
         sheet.appendRow(["Date", "Employee", "Signature"]);
       }
 
-
-      const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
-      const nextRow = sheet.getLastRow() + 1
-
-      const newRow = headers.map(function (header) {
-        // return header === 'Date' ? new Date() : e.parameter[header]
-        if (header === "Date") return new Date();
-        if (header === "Employee") return e.parameter["Employee"];
-        if (header === "Signature") return SpreadsheetApp.newCellImage().setSourceUrl(e.parameter["Signature"]).build();
-      })
-
-      sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
-
-      resToSend = newRow;
-
+      const nextRow = sheet.getLastRow() + 1;
+      const img = SpreadsheetApp.newCellImage().setSourceUrl(e.parameter["Signature"]).build();
+      const newRow = [new Date(), e.parameter["Employee"], img];
+      //todo: make append row?
+      sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow]);
     }
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'success', 'row': resToSend }))
       .setMimeType(ContentService.MimeType.JSON)
   }
 
-
   catch (e) {
-    console.log(e);
+    Logger.log(e);
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
       .setMimeType(ContentService.MimeType.JSON)
@@ -85,4 +85,61 @@ function doPost(e) {
     lock.releaseLock()
   }
 }
+
+function getImages() {
+  var folders = DriveApp.getFoldersByName("Avatar");
+  const res = {};
+  if (folders.hasNext()) {
+    var folder = folders.next();
+    var files = folder.getFiles();
+    while (files.hasNext()) {
+      var file = files.next();
+      const fileName = file.getName()
+      const name = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+      const id = file.getId()
+      res[name] = id;
+    }
+  }
+  return res;
+}
+
+function test2() {
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const sh = activeSpreadsheet.getSheetByName("Test");
+
+  const newRow = [new Date(), "aaa", 123];
+
+  try {
+    var folders = DriveApp.getFoldersByName("Avatar");
+    if (folders.hasNext()) {
+      var folder = folders.next();
+      var files = folder.getFiles();
+      while (files.hasNext()) {
+        var file = files.next();
+        const name = file.getName()
+        const id = file.getId()
+        const x = file.getUrl().toString();;
+        Logger.log({ name, id, x });
+      }
+
+
+
+
+      //Logger.log(folder);
+      //console.log(folder);
+    }
+
+    //sh.getRange(1, 1, 1, newRow.length).setValues([newRow]);
+    //sh.getRange(1, 1).setValue(JSON.stringify(newRow));
+  }
+  catch (e) {
+    console.log(e);
+  }
+}
+
+function test3() {
+  var e = { parameter: ["getList"] };
+  doPost(e);
+}
+
 

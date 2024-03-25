@@ -41,59 +41,69 @@
   </head>
   <body>
     <div class="container">
-      <h2>Signature Page Ver .12</h2>
+      <header class="header">
+        <span><img src="logo.svg" /></span>
+        Signature Page v0.13
+      </header>
 
       <div class="main">
-        <div class="name-data">
-          <div class="main-section">
-            <div id="scrollable-dropdown-menu">
-              <input
-                class="typeahead"
-                id="employeeList"
-                type="text"
-                placeholder="Loading..."
-                disabled
-              />
-            </div>
-          </div>
-
-          <div class="main-section">
-            <input type="text" class="datepicker" id="datepicker" />
+        <div class="section">
+          <div id="scrollable-dropdown-menu">
+            <input
+              class="typeahead"
+              id="employeeList"
+              type="text"
+              placeholder="Loading..."
+            />
+            <img src="search.svg" class="search-icon" />
           </div>
         </div>
 
-        <div class="main-section">
-          <canvas id="signatureCanvas" width="800" height="400"></canvas>
+        <div class="section">
+          <input type="text" class="datepicker" id="datepicker" />
+        </div>
+        <div class="section">
+          <img
+            id="photo"
+            alt="Photo"
+            loading="lazy"
+            src="default.jpg"
+            class="avatar"
+          />
         </div>
 
-        <div class="main-section">
-          <button id="saveSignatureBtn1" class="btn" onclick="saveSignature(1)">
-            Save 1
-          </button>
-          <button id="saveSignatureBtn2" class="btn" onclick="saveSignature(2)">
-            Save 2
-          </button>
+        <div class="section">
+          <div class="container-canvas">
+            <button
+              id="clearCanvasBtn"
+              class="clear-btn"
+              onclick="clearCanvas()"
+            >
+              <img src="clear.svg" class="clear-btn-icon" />
+            </button>
+
+            <canvas
+              id="signatureCanvas"
+              class="canvas"
+              width="800"
+              height="300"
+            >
+            </canvas>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="buttons">
+            <button class="save-btn" onclick="saveSignature(1)">
+              Save One
+            </button>
+            <button class="save-btn" onclick="saveSignature(2)">
+              Save Two
+            </button>
+          </div>
         </div>
       </div>
-
-      <div class="side">
-        <button id="clearCanvasBtn" class="btn" onclick="clearCanvas()">
-          X
-        </button>
-      </div>
-
-      <div class="main-section">
-        <img
-          id="photo"
-          alt="Photo"
-          loading="lazy"
-          width="256px"
-          height="256px"
-          src="default.jpg"
-          style="width: 256px; height: 256px"
-        />
-        />
-      </div>
+      <footer class="footer">Copyright</footer>
     </div>
 
     <script src="script.js"></script>

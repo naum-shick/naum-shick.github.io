@@ -1,200 +1,268 @@
+:root {
+  --primary: #1d4ed8;
+  --secondary: #3b82f6;
+  --secondary-light: #93c5fd;
+  --grey: #8997ab;
+  --grey-light: #cbd5e1;
+  --grey-25: hsla(213, 27%, 84%, 0.25);
+  --dark: #2a2e4e;
+  --text: #ffffff;
+  --box-shadow: rgba(0, 0, 0, 0.15) 0 4px 6px 3px;
+
+  --text-size: 1.25rem;
+  --title-size: 1.85rem;
+
+  --padding-x: 0.5rem;
+  --padding-y: 0.5rem;
+}
+
 * {
   font-family: Inter, sans-serif;
   box-sizing: border-box;
   margin: 0;
-}
-body {
-  background-color: #ececec;
+  padding: 0;
+  outline: 0;
 }
 
 .container {
-  padding: 2.5rem;
-  /* border: 2px solid black; */
-  height: 100vh;
-  position: relative;
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
+  display: grid;
+  max-width: 100%;
+  height: 100dvh;
+  grid-template-rows: auto 1fr auto;
 }
 
-h1,
-h2,
-h3 {
-  color: rgb(25, 103, 210);
-  text-align: center;
-}
-
-.main {
-  /* border: 1px solid red; */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1rem;
-  gap: 35px;
-}
-.main-section {
-  position: relative;
-  text-align: center;
-  width: 100%;
-  padding: 5px;
-}
-
-/* ----------------------------------------------------------- */
-.name-data {
+.header {
+  background-color: var(--primary);
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: var(--padding-y) var(--padding-x);
+  padding-top: calc(var(--padding-y) + calc(var(--padding-y) / 2));
+  font-size: var(--title-size);
+  font-weight: bold;
+  color: var(--text);
 }
 
+/* --------------------------------------------------------- */
+.main {
+  overflow: auto;
+  text-align: center;
+  padding: var(--padding-y) var(--padding-x);
+  padding-top: 1rem;
+  background-image: url("back-image.jpg");
+  background-size: cover;
+}
+.section {
+  /* border: 1px solid rgb(124, 94, 94); */
+  margin-bottom: 1rem;
+  position: relative;
+}
+#scrollable-dropdown-menu {
+  width: 500px;
+  position: relative;
+  margin: auto;
+}
+/* --------------------------------------- */
+/* --------------------------------------- */
+/* custom */
+
+.tt-input,
+.tt-hint,
 .typeahead {
-  font-size: 1.2rem;
-  font-weight: 600;
-  width: 400px;
+  width: 500px;
+  font-size: var(--text-size);
+  font-weight: bold;
   text-align: left;
-  padding: 0.8rem 1.2rem;
-  white-space: nowrap;
-  border-radius: 0.8rem;
-  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
-  box-sizing: border-box;
-  color: #121212;
-  border: 0;
-  background-color: #ffb7af;
+  padding: 5px 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
 }
 
-.datepicker {
-  font-size: 1.2rem;
-  font-weight: 600;
-  width: 150px;
-  text-align: left;
-  padding: 0.8rem 1.2rem;
-  white-space: nowrap;
-  border-radius: 0.8rem;
-  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
-  box-sizing: border-box;
-  color: #121212;
-  border: 0;
-  background-color: #ffb7af;
-}
-
-.twitter-typeahead {
-  width: 400px;
-}
-.typeahead-enabled:hover {
-  transition: box-shadow 0.2s;
-  box-shadow: #3d3d3d 0 0 0 3px, transparent 0 0 0 0;
+.tt-input {
+  box-shadow: var(--box-shadow);
 }
 
 .tt-hint {
-  color: #8c8c8c;
-}
-.typeahead:focus {
-  outline: none;
+  color: var(--grey);
 }
 
 .tt-menu {
-  background-color: #afe1ff;
+  /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+  width: 500px;
+  margin-top: 12px;
+  padding: 8px 0;
+  font-size: var(--text-size);
   text-align: left;
-  width: 400px;
-  border-radius: 0.8rem;
-  cursor: pointer;
-}
-.tt-menu div {
-  margin: 0.5rem;
-  font-size: 1.2rem;
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 20px;
 }
 
-#scrollable-dropdown-menu .tt-menu {
-  max-height: 250px;
-  overflow-y: auto;
+.tt-suggestion {
+  padding: 5px 20px;
 }
 
-/* ----------------------------------------------------------- */
-
-#signatureCanvas {
-  border-radius: 0.8rem;
-  border: 3px solid #3d3d3d;
+.tt-suggestion.tt-cursor {
+  /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+  color: #981b1b;
+  background-color: #0097cf;
 }
 
-.btn {
-  width: 150px;
-  align-items: center;
-  background-color: #afe1ff;
-  border-radius: 0.8rem;
-  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, 0.1) 0 6px 20px;
-  color: #121212;
-  cursor: pointer;
-  display: inline-flex;
-  flex: 1 1 auto;
-  font-size: 1.2rem;
-  font-weight: 700;
-  justify-content: center;
-  line-height: 1;
+.tt-suggestion p {
   margin: 0;
+}
+
+/* --------------------------------------- */
+/* --------------------------------------- */
+
+.search-icon {
+  position: absolute;
+  padding: 2px 5px;
+  left: 5px;
+}
+
+.datepicker {
+  font-size: var(--text-size);
+  text-align: center;
+  width: 130px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: none;
   outline: none;
-  padding: 1rem 1.2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.avatar {
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  width: 256px;
+  height: 256px;
+}
+
+.container-canvas {
+  display: inline;
+  position: relative;
+}
+.canvas {
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+}
+/* Buttons--------------------------------------------------------- */
+
+/* !!!!!!!!!!!!!!!!!!!!!!!! */
+/* edit placement in script with canvas measurments */
+.clear-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #fda4af;
+  border-radius: 20px;
+  color: var(--dark);
+  cursor: pointer;
+  border: 0;
+  box-shadow: var(--box-shadow);
+  position: absolute;
+
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+.clear-btn:hover {
+  background-color: #f43f5e;
+}
+.clear-btn:active {
+  background-color: #be123c;
+}
+.clear-btn-icon {
+  width: 20px;
+  height: 20px;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.save-btn {
+  /* align-items: center; */
+  background-color: var(--primary);
+  border-radius: 20px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: var(--text-size);
+  font-weight: bold;
+  /* justify-content: center; */
+  padding: 5px 24px;
   text-align: center;
   text-decoration: none;
-  transition: box-shadow 0.2s;
   border: 0;
   white-space: nowrap;
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.2s;
 }
-.btn:hover {
-  box-shadow: #3d3d3d 0 0 0 3px, transparent 0 0 0 0;
+.save-btn:hover {
+  background-color: var(--secondary);
+}
+.save-btn:active {
+  background-color: var(--secondary-light);
+}
+/* --------------------------------------------------------- */
+.footer {
+  background-color: var(--primary);
+  padding: var(--padding-y) var(--padding-x);
+  font-size: 12px;
+  color: var(--grey-light);
+}
+/* --------------------------------------------------------- */
+
+/* mobile: Portrait - under 768px
+   tablet: Portrait - between 768px and 1024px (in a rotation it definitly wil be above 1025px)
+   desktop: Landscape - above 1025px
+*/
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  :root {
+    --padding-x: 2rem;
+    --padding-y: 1rem;
+    --text-size: 2rem;
+    --title-size: 2.5rem;
+  }
+  .main {
+    padding-top: 2rem;
+  }
+  .section {
+    margin-bottom: 1.5rem;
+  }
+  .input-search {
+    width: 65%;
+  }
+  .input-date {
+    width: 220px;
+  }
+  .avatar {
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    width: 300px;
+    height: 300px;
+  }
+  .buttons {
+    gap: 50px;
+  }
+  .clear-btn {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: calc(-1rem - 50px);
+    left: calc(50% + 250px);
+  }
 }
 
-.side {
-  position: absolute;
-  right: 1rem;
-  top: 11rem;
-}
-
-#clearCanvasBtn {
-  width: 52px;
-  border-radius: 2rem;
-  background-color: #e26767;
-}
-#saveSignatureBtn1,
-#saveSignatureBtn2 {
-  background-color: #86e267;
-}
-
-@media (max-width: 1200px) {
-  .container {
-    padding: 2.5rem 0.5rem;
-  }
-  .side {
-    right: 5rem;
-  }
-}
-
-@media (max-width: 980px) {
-  .container {
-    padding: 2.5rem 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 2.5rem 0.5rem;
-  }
-  .twitter-typeahead {
-    width: 100%;
-  }
-  .typeahead {
-    width: 100%;
-  }
-  .tt-dropdown-menu {
-    width: 100%;
-  }
-
-  .side {
-    right: 50%;
-    transform: translate(50%);
-    top: unset;
-    bottom: 5rem;
-  }
-
-  img {
-    border: 2px solid #555;
+@media screen and (min-width: 1025px) {
+  .input-search {
+    width: 35%;
   }
 }
