@@ -204,6 +204,7 @@ function namesMatcher(listNames) {
       }
     )
     .bind("typeahead:selected", function (_obj, datum, _name) {
+      document.activeElement.blur(); // close keyboard?!
       setImage(datum);
     });
 
