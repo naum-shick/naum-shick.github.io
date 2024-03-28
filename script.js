@@ -18,6 +18,9 @@ const canvas = document.getElementById("signatureCanvas");
 const ctx = canvas.getContext("2d");
 const strokeSize = 5;
 const color = 0;
+const resizeWidth = 200;
+const resizeHeight = 100;
+
 let drawing = false;
 
 window.addEventListener("resize", adjustCanvas);
@@ -82,6 +85,8 @@ function stopDrawing() {
 
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //ctx.fillStyle = "white"; // only for jpeg
+  //ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 300;
 function adjustCanvas() {
@@ -114,7 +119,28 @@ const imageUrl = "https://drive.google.com/thumbnail?id=#&sz=w1000";
 let nameImages;
 
 async function saveSignature(shift) {
-  const dataURL = canvas.toDataURL();
+  // resize mage
+  var canvasResize = document.createElement("canvas");
+
+  canvasResize.width = resizeWidth;
+  canvasResize.height = resizeHeight;
+
+  var ctxResize = canvasResize.getContext("2d");
+  ctxResize.drawImage(
+    canvas,
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+    0,
+    0,
+    resizeWidth,
+    resizeHeight
+  );
+
+  const dataURL = canvasResize.toDataURL("image/png");
+
+  console.log({ len: dataURL.length });
 
   const formData = new FormData();
   formData.append("Signature", dataURL);
@@ -135,7 +161,6 @@ async function saveSignature(shift) {
 
   const data = await res.json();
   if (data.result === "success") {
-    clearCanvas();
     $("#employeeList").val("");
     console.log(data);
     alert("Signature is done successfully");
@@ -168,6 +193,8 @@ async function getList() {
     $("#employeeList").removeAttr("disabled");
     $("#employeeList").addClass("typeahead-enabled");
     $("#employeeList").attr("placeholder", "Type a name");
+
+    clearCanvas();
   }
 }
 
@@ -204,7 +231,6 @@ function namesMatcher(listNames) {
       }
     )
     .bind("typeahead:selected", function (_obj, datum, _name) {
-      document.activeElement.blur(); // close keyboard?!
       setImage(datum);
     });
 
