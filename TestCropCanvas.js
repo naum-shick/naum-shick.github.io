@@ -88,6 +88,82 @@ function clearCanvas() {
   //ctx.fillStyle = "white"; // only for jpeg
   //ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
+300;
+function adjustCanvas() {
+  if (window.innerWidth > 1200) {
+    canvas.setAttribute("width", "800");
+    canvas.setAttribute("height", "300");
+  }
+  if (window.innerWidth <= 1200 && window.innerWidth > 980) {
+    canvas.setAttribute("width", "650");
+    canvas.setAttribute("height", "280");
+  }
+  if (window.innerWidth <= 980 && window.innerWidth > 480) {
+    canvas.setAttribute("width", "500");
+    canvas.setAttribute("height", "250");
+  }
+  if (window.innerWidth <= 480 || screen.width <= 480) {
+    // console.log(`width <= 480`);
+    canvas.setAttribute("width", "250");
+    canvas.setAttribute("height", "300");
+  }
+}
+
+// make fetch url from command line
+const paramsString = window.location.href;
+const url = new URL(paramsString);
+const params = url.searchParams.get("q");
+const fetch_URL = `https://script.google.com/macros/s/${params}/exec`;
+const imageUrl = "https://drive.google.com/thumbnail?id=#&sz=w1000";
+
+let nameImages;
+
+async function saveSignature(shift) {
+  // resize mage
+  var canvasResize = document.createElement("canvas");
+
+  canvasResize.width = resizeWidth;
+  canvasResize.height = resizeHeight;
+
+  var ctxResize = canvasResize.getContext("2d");
+  ctxResize.drawImage(
+    canvas,
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+    0,
+    0,
+    resizeWidth,
+    resizeHeight
+  );
+
+  const canvasTrim = trimCanvas(canvasResize);
+
+  const dataURL = canvasTrim.toDataURL("image/png");
+
+  console.log({ len: dataURL.length });
+
+  // test result
+  var img = new window.Image();
+  img.addEventListener("load", function () {
+    cropCanvas
+      .getContext("2d")
+      .clearRect(0, 0, cropCanvas.width, cropCanvas.height);
+    cropCanvas.width = img.width;
+    cropCanvas.height = img.height;
+    cropCanvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
+  });
+
+  img.setAttribute("src", dataURL);
+  /////
+}
+
+async function getList() {
+  $("#employeeList").removeAttr("disabled");
+  $("#employeeList").addClass("typeahead-enabled");
+  $("#employeeList").attr("placeholder", "Type a name");
+}
 
 //from https://gist.github.com/timdown/021d9c8f2aabc7092df564996f5afbbf#file-trim_canvas-js
 var trimCanvas = (function () {
@@ -134,133 +210,6 @@ var trimCanvas = (function () {
     return copy;
   };
 })();
-
-/**
- * resize canvas
- * @param {canvas} canvas
- * @param {Number} resizeWidth width new canvas
- * @param {Number} resizeHeight height new canvas
- * @returns {canvas} canvase with new size
- */
-function resizeCanvas(canvas, resizeWidth, resizeHeight) {
-  var canvasResize = document.createElement("canvas");
-
-  canvasResize.width = resizeWidth;
-  canvasResize.height = resizeHeight;
-
-  var ctxResize = canvasResize.getContext("2d", { willReadFrequently: true });
-  ctxResize.drawImage(
-    canvas,
-    0,
-    0,
-    canvas.width,
-    canvas.height,
-    0,
-    0,
-    resizeWidth,
-    resizeHeight
-  );
-
-  return canvasResize;
-}
-
-function adjustCanvas() {
-  if (window.innerWidth > 1200) {
-    canvas.setAttribute("width", "800");
-    canvas.setAttribute("height", "300");
-  }
-  if (window.innerWidth <= 1200 && window.innerWidth > 980) {
-    canvas.setAttribute("width", "650");
-    canvas.setAttribute("height", "280");
-  }
-  if (window.innerWidth <= 980 && window.innerWidth > 480) {
-    canvas.setAttribute("width", "500");
-    canvas.setAttribute("height", "250");
-  }
-  if (window.innerWidth <= 480 || screen.width <= 480) {
-    // console.log(`width <= 480`);
-    canvas.setAttribute("width", "250");
-    canvas.setAttribute("height", "300");
-  }
-}
-
-// make fetch url from command line
-const paramsString = window.location.href;
-const url = new URL(paramsString);
-const params = url.searchParams.get("q");
-const fetch_URL = `https://script.google.com/macros/s/${params}/exec`; // deploy version
-////const fetch_URL = `https://script.google.com/macros/s/${params}/dev`; // developer version
-const imageUrl = "https://drive.google.com/thumbnail?id=#&sz=w256";
-
-let nameImages;
-
-async function saveSignature(shift) {
-  // resize mage
-  const rs = resizeCanvas(canvas, resizeWidth, resizeHeight);
-  const tr = trimCanvas(rs);
-
-  const dataURL = tr.toDataURL("image/png");
-
-  console.log({ len: dataURL.length });
-
-  const formData = new FormData();
-  formData.append("Signature", dataURL);
-
-  const employee = $("#employeeList").val();
-  formData.append("Employee", employee);
-
-  const signDate = $("#datepicker").val(); // string with original format
-
-  formData.append("SignDate", signDate);
-
-  formData.append("Shift", shift);
-
-  const res = await fetch(fetch_URL, {
-    method: "POST",
-    body: formData,
-  });
-
-  const data = await res.json();
-  if (data.result === "success") {
-    $("#employeeList").val("");
-    console.log(data);
-    alert("Signature is done successfully");
-  } else {
-    console.log(data);
-    alert("Error");
-  }
-}
-
-async function getList() {
-  const formData = new FormData();
-  formData.append("getList", "getList");
-  const res = await fetch(fetch_URL, {
-    method: "POST",
-    body: formData,
-  });
-  const data = await res.json();
-  ////console.log(data);
-  if (data.row !== undefined) {
-    nameImages = data.row;
-
-    ////console.log(JSON.stringify(nameImages)); //debug names/images
-
-    const listNames = nameImages.map((val) => val.name);
-    namesMatcher(listNames);
-
-    // // // {
-    // // //   const listNames = ["aaa", "asdd", "asd", "bbb"];
-    // // //   namesMatcher(listNames);
-
-    // after load - convert "Loading..." to work typeahead imput
-
-    $("#employeeList").removeAttr("disabled");
-    $("#employeeList").addClass("typeahead-enabled");
-    $("#employeeList").attr("placeholder", "Type a name");
-
-    clearCanvas();
-  }
-}
 
 function namesMatcher(listNames) {
   const substringMatcher = function (strs) {

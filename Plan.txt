@@ -1,0 +1,25 @@
+1. Create new google table; add
+  - main sheet: logo; header; button for process; log or statistics
+  - config sheet: patch to (+)
+      - name list
+	  - photo list
+	  - folder to group sign 
+	  - folder to individual sign
+	  - path to calendar (bonus)
+      - create sheet for each date with actual sign (simple save sign)
+  - do post save in sheet with current date; save name/sign/ыршае
+
+2. Web Application - add test on empty sign? 
+3. Web App - test on automatick truncate image
+4. main sheet - add process button:
+   - create/fill group sign 
+   - fill/create individual sign
+   - make check in calendar
+   - remove old sign 
+   - add log/statistics to main page
+5. make web page to special host (github)
+6. write document about system
+7. make "Loading" animation/css on web page
+
+   
+   
