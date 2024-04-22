@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017
+ * Copyright (c) 2024
  *
  * Script for:
  * - get namelist from google sheet (publish script)
@@ -124,6 +124,10 @@ var trimCanvas = (function () {
     )
       --right;
 
+    if (left >= right || top >= bottom) {
+      return null; //not exist image
+    }
+
     const trimmed = ctx.getImageData(left, top, right - left, bottom - top);
     const copy = canvas.ownerDocument.createElement("canvas");
     const copyCtx = copy.getContext("2d");
@@ -195,9 +199,23 @@ const imageUrl = "https://drive.google.com/thumbnail?id=#&sz=w256";
 let nameImages;
 
 async function saveSignature(shift) {
-  // resize mage
+  const employee = $("#employeeList").val();
+  if (employee.trim() == "") {
+    blurt("Please, enter employee name!", "", "warning");
+    return;
+  }
+
+  //todo: if name empty - create message, exit
+  // resize image
   const rs = resizeCanvas(canvas, resizeWidth, resizeHeight);
   const tr = trimCanvas(rs);
+
+  if (!tr) {
+    blurt("Please sign!", "", "warning");
+    return;
+  }
+
+  //if canvas empty - create message, exit
 
   const dataURL = tr.toDataURL("image/png");
 
@@ -206,7 +224,6 @@ async function saveSignature(shift) {
   const formData = new FormData();
   formData.append("Signature", dataURL);
 
-  const employee = $("#employeeList").val();
   formData.append("Employee", employee);
 
   const signDate = $("#datepicker").val(); // string with original format
@@ -222,12 +239,16 @@ async function saveSignature(shift) {
 
   const data = await res.json();
   if (data.result === "success") {
-    $("#employeeList").val("");
+    blurt("Signature is done successfully", "", "success");
+
+    clearEmployer();
+    clearCanvas();
+    clearImage();
+
     console.log(data);
-    alert("Signature is done successfully");
   } else {
     console.log(data);
-    alert("Error");
+    blurt("Upss... error", "", "error");
   }
 }
 
@@ -248,16 +269,13 @@ async function getList() {
     const listNames = nameImages.map((val) => val.name);
     namesMatcher(listNames);
 
-    // // // {
-    // // //   const listNames = ["aaa", "asdd", "asd", "bbb"];
-    // // //   namesMatcher(listNames);
-
-    // after load - convert "Loading..." to work typeahead imput
+    // after load - convert "Loading..." to work typeahead input
 
     $("#employeeList").removeAttr("disabled");
     $("#employeeList").addClass("typeahead-enabled");
     $("#employeeList").attr("placeholder", "Type a name");
 
+    $(".loader").hide();
     clearCanvas();
   }
 }
@@ -297,25 +315,33 @@ function namesMatcher(listNames) {
     .bind("typeahead:selected", function (_obj, datum, _name) {
       setImage(datum);
     });
+}
 
-  //datepicker
-  $(function () {
-    $("#datepicker")
-      .datepicker({
-        minDate: "-1m",
-        maxDate: "1d",
-      })
-      .datepicker("setDate", "0d"); // today
-  });
+function clearEmployer() {
+  $("#employeeList").typeahead("val", "");
+}
 
-  function setImage(name) {
-    const ni = nameImages.find((x) => x.name == name);
-    if (ni.imageId != undefined) {
-      const url = imageUrl.replace("#", ni.imageId);
-      console.log(url);
-      $("#photo").attr("src", url);
-    } else {
-      $("#photo").attr("src", "default.jpg");
-    }
+//datepicker
+$(function () {
+  $("#datepicker")
+    .datepicker({
+      minDate: "-1m",
+      maxDate: "1d",
+    })
+    .datepicker("setDate", "0d"); // today
+});
+
+function clearImage() {
+  $("#photo").attr("src", "default.jpg");
+}
+
+function setImage(name) {
+  const ni = nameImages.find((x) => x.name == name);
+  if (ni.imageId != undefined) {
+    const url = imageUrl.replace("#", ni.imageId);
+    console.log(url);
+    $("#photo").attr("src", url);
+  } else {
+    $("#photo").attr("src", "default.jpg");
   }
 }

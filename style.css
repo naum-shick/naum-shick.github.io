@@ -268,3 +268,34 @@
     width: 35%;
   }
 }
+
+.loader {
+  position: absolute;
+  inset: 0;
+  display: flex; /*для того чтобы скрыть (когда закачалось) поменять на none*/
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+.dots-3 {
+  width: 100px; /*если увеличивать размер- видно что края мягкие, но это можно поменять:)*/
+  aspect-ratio: 2; /*Это определяет ширину*/
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000); /* чёрный цвет поменять на какой хотим */
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: d3 1s infinite ease-in-out;
+}
+@keyframes d3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
