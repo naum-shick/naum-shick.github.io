@@ -217,6 +217,7 @@ async function saveSignature(shift) {
 
   //if canvas empty - create message, exit
 
+  $(".loader").show();
   const dataURL = tr.toDataURL("image/png");
 
   console.log({ len: dataURL.length });
@@ -238,6 +239,7 @@ async function saveSignature(shift) {
   });
 
   const data = await res.json();
+  $(".loader").hide();
   if (data.result === "success") {
     blurt("Signature is done successfully", "", "success");
 
@@ -245,7 +247,7 @@ async function saveSignature(shift) {
     clearCanvas();
     clearImage();
 
-    console.log(data);
+    ////console.log(data);
   } else {
     console.log(data);
     blurt("Upss... error", "", "error");
@@ -269,11 +271,10 @@ async function getList() {
     const listNames = nameImages.map((val) => val.name);
     namesMatcher(listNames);
 
-    // after load - convert "Loading..." to work typeahead input
+    // after load -  typeahead input
 
     $("#employeeList").removeAttr("disabled");
     $("#employeeList").addClass("typeahead-enabled");
-    $("#employeeList").attr("placeholder", "Type a name");
 
     $(".loader").hide();
     clearCanvas();
@@ -313,6 +314,7 @@ function namesMatcher(listNames) {
       }
     )
     .bind("typeahead:selected", function (_obj, datum, _name) {
+      $("#employeeList").blur();
       setImage(datum);
     });
 }
@@ -326,7 +328,7 @@ $(function () {
   $("#datepicker")
     .datepicker({
       minDate: "-1m",
-      maxDate: "1d",
+      maxDate: "0d",
     })
     .datepicker("setDate", "0d"); // today
 });
@@ -339,7 +341,7 @@ function setImage(name) {
   const ni = nameImages.find((x) => x.name == name);
   if (ni.imageId != undefined) {
     const url = imageUrl.replace("#", ni.imageId);
-    console.log(url);
+    ////console.log(url);
     $("#photo").attr("src", url);
   } else {
     $("#photo").attr("src", "default.jpg");

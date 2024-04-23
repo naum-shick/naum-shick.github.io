@@ -269,6 +269,7 @@
   }
 }
 
+/**************** loader animation *******/
 .loader {
   position: absolute;
   inset: 0;
@@ -280,7 +281,8 @@
 .dots-3 {
   width: 100px; /*если увеличивать размер- видно что края мягкие, но это можно поменять:)*/
   aspect-ratio: 2; /*Это определяет ширину*/
-  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000); /* чёрный цвет поменять на какой хотим */
+  --_g: no-repeat
+    radial-gradient(circle closest-side, var(--primary) 90%, #0000); /* чёрный цвет поменять на какой хотим */
   background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
   background-size: calc(100% / 3) 50%;
   animation: d3 1s infinite ease-in-out;
