@@ -301,3 +301,51 @@
     background-position: 0% 50%, 50% 50%, 100% 100%;
   }
 }
+/*************** kebab *********************/
+/* from: */
+/* https://www.codehim.com/menu/animated-kebab-menu-in-html-css/ */
+
+.kebab {
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+.kebab-icon figure {
+  width: 10px; /*size of a dot*/
+  height: 10px;
+  border-radius: 5px;
+  background: #000000;
+  margin: 5px 16px; /*distance between dots*/
+}
+
+.dropdown {
+  background-color: var(--primary);
+  position: absolute;
+  right: 0;
+  padding: 5px;
+  border-radius: 5px;
+  top: 3em; /* important to use em- relative to a font-size of a parent(because relative-absolute relation) */
+  transition: all 0.25s ease-out;
+  transform: scale(0);
+  transform-origin: 100% 0; /*start from right top corner*/
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+
+  z-index: 1;
+}
+
+.dropdown li {
+  display: block;
+  width: 100px;
+  list-style-type: none;
+  margin: 5px;
+  font-size: medium; /*todo: make font size by main font  */
+}
+
+.dropdown.active {
+  transform: scale(1);
+  transition: all 0.25s cubic-bezier(0.5, 1.8, 0.9);
+}
