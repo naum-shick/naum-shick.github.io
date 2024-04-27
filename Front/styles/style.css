@@ -39,7 +39,7 @@
   background-color: var(--primary);
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 6px;
   padding: var(--padding-y) var(--padding-x);

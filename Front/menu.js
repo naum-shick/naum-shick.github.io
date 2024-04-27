@@ -38,7 +38,7 @@ async function makeGroup(fetch_URL) {
   }
 }
 
-export function handleMenuClick(e, fetch_URL) {
+function handleMenuClick(e, fetch_URL) {
   //todoL: to function
   //console.log(e.target.classList);
   if (e.target.classList.contains("no-close-menu")) {

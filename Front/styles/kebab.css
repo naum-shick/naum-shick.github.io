@@ -25,13 +25,13 @@
   position: absolute;
   right: var(--padding-y);
   padding: 5px;
-  border-radius: 0 0 20px 20px;
-  top: 100%; /* important to use em- relative to a font-size of a parent(because relative-absolute relation) */
+  border-radius: 5px;
+  top: 105%;
   transition: all 0.25s ease-out;
   transform: scale(0);
   transform-origin: 100% 0; /*start from right top corner*/
   /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12); */
-  /* box-shadow: var(--box-shadow); */
+  box-shadow: var(--box-shadow);
   z-index: 1;
 }
 

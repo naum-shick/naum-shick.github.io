@@ -1,7 +1,7 @@
-export function clearImage() {
+function clearImage() {
   $("#photo").attr("src", "default.jpg");
 }
 
-export function clearEmployer() {
+function clearEmployer() {
   $("#employeeList").typeahead("val", "");
 }

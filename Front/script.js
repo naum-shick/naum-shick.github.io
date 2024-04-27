@@ -25,15 +25,6 @@ const imageUrl = "https://drive.google.com/thumbnail?id=#&sz=w256";
 const canvas = $("#signatureCanvas").get(0);
 const ctx = canvas.getContext("2d");
 
-import {
-  adjustCanvas,
-  startDrawing,
-  draw,
-  stopDrawing,
-  clearCanvas,
-  resizeCanvas,
-} from "./canvas.js";
-
 window.addEventListener("resize", () => adjustCanvas(canvas));
 adjustCanvas(canvas); // for define size onOpen
 
@@ -49,8 +40,6 @@ canvas.addEventListener("touchcancel", () => stopDrawing());
 
 $("#clearCanvasBtn").on("click", () => clearCanvas(canvas, ctx));
 
-import { handleMenuClick } from "./menu.js";
-
 window.addEventListener("click", (e) => handleMenuClick(e, fetch_URL));
 
 // -----------------------------------------------------------------------------------------
@@ -59,7 +48,7 @@ window.addEventListener("load", getList);
 
 let nameImages;
 
-export async function getList() {
+async function getList() {
   const formData = new FormData();
   formData.append("getList", "getList");
 
@@ -87,7 +76,7 @@ export async function getList() {
     clearCanvas(canvas, ctx);
   }
 }
-// todo: export to another file
+// todo: to another file
 function namesMatcher(listNames) {
   const substringMatcher = function (strs) {
     return function findMatches(q, cb) {
@@ -137,7 +126,6 @@ function setImage(name) {
 }
 // ----------------------------------------------------------------------
 // ----------------------------------------------------------------------
-import { clearImage, clearEmployer } from "./helpers.js";
 
 //datepicker
 $(function () {
@@ -149,7 +137,7 @@ $(function () {
     .datepicker("setDate", "0d"); // today
 });
 
-export async function saveSignature(shift) {
+async function saveSignature(shift) {
   const employee = $("#employeeList").val();
   if (employee.trim() == "") {
     blurt("Please, enter employee name!", "", "warning");
@@ -202,5 +190,35 @@ export async function saveSignature(shift) {
   } else {
     console.log(data);
     blurt("Upss... error save signature", "", "error");
+  }
+}
+
+function about() {
+  blurt(
+    "Signature",
+    "А вот это программу так еще не доделали Яна Шик и Наум Шик",
+    "info"
+  );
+}
+
+async function makeGroup(fetch_URL) {
+  $(".loader").show();
+  const formData = new FormData();
+  formData.append("makeGroup", "makeGroup");
+
+  const res = await fetch(fetch_URL, {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await res.json();
+  $(".loader").hide();
+  if (data.result === "success") {
+    blurt("Group Sheet start successfully", "", "success");
+
+    ////console.log(data);
+  } else {
+    console.log(data);
+    blurt("Upss... error start make group", "", "error");
   }
 }

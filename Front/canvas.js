@@ -1,4 +1,4 @@
-export function adjustCanvas(canvas) {
+function adjustCanvas(canvas) {
   if (window.innerWidth > 1200) {
     canvas.setAttribute("width", "800");
     canvas.setAttribute("height", "300");
@@ -22,14 +22,14 @@ const strokeSize = 5;
 const color = 0;
 let drawing = false;
 
-export function startDrawing(e, canvas, ctx) {
+function startDrawing(e, canvas, ctx) {
   drawing = true;
   ctx.beginPath();
   const rect = canvas.getBoundingClientRect();
   ctx.moveTo(e.clientX - rect.left.toFixed(), e.clientY - rect.top.toFixed());
 }
 
-export function draw(e, canvas, ctx) {
+function draw(e, canvas, ctx) {
   if (!drawing) {
     return;
   }
@@ -63,11 +63,11 @@ export function draw(e, canvas, ctx) {
   }
 }
 
-export function stopDrawing() {
+function stopDrawing() {
   drawing = false;
 }
 
-export function clearCanvas(canvas, ctx) {
+function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   //ctx.fillStyle = "white"; // only for jpeg
   //ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -85,7 +85,7 @@ export function clearCanvas(canvas, ctx) {
 const resizeWidth = 200;
 const resizeHeight = 100;
 
-export function resizeCanvas(canvas) {
+function resizeCanvas(canvas) {
   var canvasResize = document.createElement("canvas");
 
   canvasResize.width = resizeWidth;
