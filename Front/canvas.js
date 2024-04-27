@@ -1,21 +1,28 @@
+const RESIZE_WIDTH = 200;
+
 function adjustCanvas(canvas) {
-  if (window.innerWidth > 1200) {
-    canvas.setAttribute("width", "800");
-    canvas.setAttribute("height", "300");
-  }
-  if (window.innerWidth <= 1200 && window.innerWidth > 980) {
-    canvas.setAttribute("width", "650");
-    canvas.setAttribute("height", "280");
-  }
-  if (window.innerWidth <= 980 && window.innerWidth > 480) {
-    canvas.setAttribute("width", "500");
-    canvas.setAttribute("height", "250");
-  }
-  if (window.innerWidth <= 480 || screen.width <= 480) {
-    // console.log(`width <= 480`);
-    canvas.setAttribute("width", "250");
-    canvas.setAttribute("height", "300");
-  }
+  const w = window.innerWidth > 800 ? 800 : window.innerWidth * 0.95;
+  const h = w / 2 > 300 ? 300 : w / 2;
+
+  canvas.setAttribute("width", w);
+  canvas.setAttribute("height", h);
+
+  // if (window.innerWidth > 1200) {
+  //   canvas.setAttribute("width", "800");
+  //   canvas.setAttribute("height", "400");
+  // }
+  // if (window.innerWidth <= 1200 && window.innerWidth > 980) {
+  //   canvas.setAttribute("width", "650");
+  //   canvas.setAttribute("height", "280");
+  // }
+  // if (window.innerWidth <= 980 && window.innerWidth > 480) {
+  //   canvas.setAttribute("width", "500");
+  //   canvas.setAttribute("height", "250");
+  // }
+  // if (window.innerWidth <= 480 || screen.width <= 480) {
+  //   canvas.setAttribute("width", "360");
+  //   canvas.setAttribute("height", "180");
+  // }
 }
 
 const strokeSize = 5;
@@ -69,8 +76,6 @@ function stopDrawing() {
 
 function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //ctx.fillStyle = "white"; // only for jpeg
-  //ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 // -----------------------------------------------------------------------------
@@ -82,13 +87,13 @@ function clearCanvas(canvas, ctx) {
 //  * @param {Number} resizeHeight height new canvas
 //  * @returns {canvas} canvase with new size
 //  */
-const resizeWidth = 200;
-const resizeHeight = 100;
 
 function resizeCanvas(canvas) {
+  const resizeHeight = canvas.height * (RESIZE_WIDTH / canvas.width);
+
   var canvasResize = document.createElement("canvas");
 
-  canvasResize.width = resizeWidth;
+  canvasResize.width = RESIZE_WIDTH;
   canvasResize.height = resizeHeight;
 
   var ctxResize = canvasResize.getContext("2d", { willReadFrequently: true });
@@ -100,7 +105,7 @@ function resizeCanvas(canvas) {
     canvas.height,
     0,
     0,
-    resizeWidth,
+    RESIZE_WIDTH,
     resizeHeight
   );
 
