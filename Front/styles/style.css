@@ -14,10 +14,12 @@
   --box-shadow: rgba(0, 0, 0, 0.15) 0 4px 6px 3px;
 
   --text-size: 1.25rem;
-  --title-size: 1.85rem;
+  --title-size: 1.5rem;
 
   --padding-x: 0.5rem;
   --padding-y: 0.5rem;
+
+  --input-width: 80vw;
 }
 
 * {
@@ -64,7 +66,7 @@
   position: relative;
 }
 #scrollable-dropdown-menu {
-  width: 500px;
+  width: var(--input-width);
   position: relative;
   margin: auto;
 }
@@ -75,7 +77,7 @@
 .tt-input,
 .tt-hint,
 .typeahead {
-  width: 500px;
+  width: var(--input-width);
   font-size: var(--text-size);
   font-weight: bold;
   text-align: left;
@@ -95,7 +97,7 @@
 
 .tt-menu {
   /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
-  width: 500px;
+  width: var(--input-width);
   margin-top: 12px;
   padding: 8px 0;
   font-size: var(--text-size);
@@ -171,13 +173,13 @@
    tablet: Portrait - between 768px and 1024px (in a rotation it definitly wil be above 1025px)
    desktop: Landscape - above 1025px
 */
-
-/* @media screen and (min-width: 768px) and (max-width: 1024px) {
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   :root {
     --padding-x: 2rem;
     --padding-y: 1rem;
     --text-size-fake: 2rem;
-    --title-size: 2.5rem;
+    --title-size: 1.85rem;
   }
   .main {
     padding-top: 2rem;
@@ -185,12 +187,7 @@
   .section {
     margin-bottom: 1.5rem;
   }
-  .input-search {
-    width: 65%;
-  }
-  .input-date {
-    width: 220px;
-  }
+
   .avatar {
     border-radius: 20px;
     box-shadow: var(--box-shadow);
@@ -209,8 +206,10 @@
   }
 }
 
+/* desktop */
 @media screen and (min-width: 1025px) {
-  .input-search {
-    width: 35%;
+  :root {
+    --title-size: 1.85rem;
+    --input-width: 500px;
   }
-} */
+}
