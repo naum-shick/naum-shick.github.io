@@ -1,7 +1,7 @@
 const RESIZE_WIDTH = 200;
 
 function adjustCanvas(canvas) {
-  const w = window.innerWidth > 800 ? 800 : window.innerWidth * 0.95;
+  const w = window.innerWidth > 850 ? 800 : window.innerWidth * 0.9;
   const h = w / 2 > 300 ? 300 : w / 2;
 
   canvas.setAttribute("width", w);

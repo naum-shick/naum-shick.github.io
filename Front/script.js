@@ -183,7 +183,7 @@ async function saveSignature(shift) {
     blurt("Signature is done successfully", "", "success");
 
     clearEmployer();
-    cclearCanvas(canvas, ctx);
+    clearCanvas(canvas, ctx);
     clearImage();
 
     ////console.log(data);
@@ -196,7 +196,7 @@ async function saveSignature(shift) {
 function about() {
   blurt(
     "Signature",
-    "А вот это программу так еще не доделали Яна Шик и Наум Шик\n" +
+    "А вот это программу так еще не доделали Яна Шик и Наум Шик" +
       `innerWidth = ${window.innerWidth}`,
     "info"
   );
