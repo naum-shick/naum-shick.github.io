@@ -172,7 +172,7 @@
    desktop: Landscape - above 1025px
 */
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+/* @media screen and (min-width: 768px) and (max-width: 1024px) {
   :root {
     --padding-x: 2rem;
     --padding-y: 1rem;
@@ -213,4 +213,4 @@
   .input-search {
     width: 35%;
   }
-}
+} */
