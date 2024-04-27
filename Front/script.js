@@ -121,7 +121,7 @@ function setImage(name) {
     ////console.log(url);
     $("#photo").attr("src", url);
   } else {
-    $("#photo").attr("src", "default.png");
+    $("#photo").attr("src", "assets/images/default.png");
   }
 }
 // ----------------------------------------------------------------------
