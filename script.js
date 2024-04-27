@@ -190,19 +190,23 @@ function adjustCanvas() {
   if (window.innerWidth > 1200) {
     canvas.setAttribute("width", "800");
     canvas.setAttribute("height", "300");
+    $("#employeeList").width(500);
   }
   if (window.innerWidth <= 1200 && window.innerWidth > 980) {
     canvas.setAttribute("width", "650");
     canvas.setAttribute("height", "280");
+    $("#employeeList").width(500);
   }
   if (window.innerWidth <= 980 && window.innerWidth > 480) {
     canvas.setAttribute("width", "500");
     canvas.setAttribute("height", "250");
+    $("#employeeList").width(500);
   }
   if (window.innerWidth <= 480 || screen.width <= 480) {
     // console.log(`width <= 480`);
     canvas.setAttribute("width", "250");
     canvas.setAttribute("height", "300");
+    $("#employeeList").width(250);
   }
 }
 
@@ -276,29 +280,29 @@ async function getList() {
   const formData = new FormData();
   formData.append("getList", "getList");
 
-  const res = await fetch(fetch_URL, {
-    method: "POST",
-    body: formData,
-  });
+  // const res = await fetch(fetch_URL, {
+  //   method: "POST",
+  //   body: formData,
+  // });
 
-  const data = await res.json();
-  ////console.log(data);
-  if (data.row !== undefined) {
-    nameImages = data.row;
+  // const data = await res.json();
+  // ////console.log(data);
+  // if (data.row !== undefined) {
+  //   nameImages = data.row;
 
-    ////console.log(JSON.stringify(nameImages)); //debug names/images
+  //   ////console.log(JSON.stringify(nameImages)); //debug names/images
 
-    const listNames = nameImages.map((val) => val.name);
-    namesMatcher(listNames);
+  //   const listNames = nameImages.map((val) => val.name);
+  //   namesMatcher(listNames);
 
-    // after load -  typeahead input
+  //   // after load -  typeahead input
 
-    $("#employeeList").removeAttr("disabled");
-    $("#employeeList").addClass("typeahead-enabled");
+  //   $("#employeeList").removeAttr("disabled");
+  //   $("#employeeList").addClass("typeahead-enabled");
 
-    $(".loader").hide();
-    clearCanvas();
-  }
+  $(".loader").hide();
+  //   clearCanvas();
+  // }
 }
 
 function about() {

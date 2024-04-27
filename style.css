@@ -70,7 +70,8 @@
 .tt-input,
 .tt-hint,
 .typeahead {
-  width: 500px;
+  /* width: 500px; */
+  max-width: 95%;
   font-size: var(--text-size);
   font-weight: bold;
   text-align: left;
@@ -315,8 +316,8 @@
 }
 
 .kebab-icon figure {
-  width: 10px; /*size of a dot*/
-  height: 10px;
+  width: 6px; /*size of a dot*/
+  height: 6px;
   border-radius: 5px;
   background: #000000;
   margin: 5px 16px; /*distance between dots*/
@@ -328,7 +329,7 @@
   right: 0;
   padding: 5px;
   border-radius: 5px;
-  top: 3em; /* important to use em- relative to a font-size of a parent(because relative-absolute relation) */
+  top: 2em; /* important to use em- relative to a font-size of a parent(because relative-absolute relation) */
   transition: all 0.25s ease-out;
   transform: scale(0);
   transform-origin: 100% 0; /*start from right top corner*/
@@ -338,11 +339,10 @@
 }
 
 .dropdown li {
-  display: block;
-  width: 100px;
+  display: inline-block;
   list-style-type: none;
   margin: 5px;
-  font-size: medium; /*todo: make font size by main font  */
+  font-size: var(--text-size);
 }
 
 .dropdown.active {
