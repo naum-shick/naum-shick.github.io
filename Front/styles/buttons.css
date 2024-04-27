@@ -1,0 +1,59 @@
+/* !!!!!!!!!!!!!!!!!!!!!!!! */
+/* edit placement in script with canvas measurments */
+.clear-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #fda4af;
+  border-radius: 20px;
+  color: var(--dark);
+  cursor: pointer;
+  border: 0;
+  box-shadow: var(--box-shadow);
+  position: absolute;
+
+  top: 0px;
+  right: 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+.clear-btn:hover {
+  background-color: #f43f5e;
+}
+.clear-btn:active {
+  background-color: #be123c;
+}
+.clear-btn-icon {
+  width: 20px;
+  height: 20px;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.save-btn {
+  /* align-items: center; */
+  background-color: var(--primary);
+  border-radius: 20px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: var(--text-size);
+  font-weight: bold;
+  /* justify-content: center; */
+  padding: 5px 24px;
+  text-align: center;
+  text-decoration: none;
+  border: 0;
+  white-space: nowrap;
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.2s;
+}
+.save-btn:hover {
+  background-color: var(--secondary);
+}
+.save-btn:active {
+  background-color: var(--secondary-light);
+}

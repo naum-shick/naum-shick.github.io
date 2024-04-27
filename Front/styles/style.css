@@ -1,0 +1,216 @@
+@import "./loader.css";
+@import "./buttons.css";
+@import "./kebab.css";
+
+:root {
+  --primary: #1d4ed8;
+  --secondary: #3b82f6;
+  --secondary-light: #93c5fd;
+  --grey: #8997ab;
+  --grey-light: #cbd5e1;
+  --grey-25: hsla(213, 27%, 84%, 0.25);
+  --dark: #2a2e4e;
+  --text: #ffffff;
+  --box-shadow: rgba(0, 0, 0, 0.15) 0 4px 6px 3px;
+
+  --text-size: 1.25rem;
+  --title-size: 1.85rem;
+
+  --padding-x: 0.5rem;
+  --padding-y: 0.5rem;
+}
+
+* {
+  font-family: Inter, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+.container {
+  display: grid;
+  max-width: 100%;
+  height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header {
+  background-color: var(--primary);
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: var(--padding-y) var(--padding-x);
+  padding-top: calc(var(--padding-y) + calc(var(--padding-y) / 2));
+  font-size: var(--title-size);
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* --------------------------------------------------------- */
+.main {
+  overflow: auto;
+  text-align: center;
+  padding: var(--padding-y) var(--padding-x);
+  padding-top: 1rem;
+  background-image: url("../assets/images/back-image.jpg");
+  background-size: cover;
+}
+.section {
+  /* border: 1px solid rgb(124, 94, 94); */
+  margin-bottom: 1rem;
+  position: relative;
+}
+#scrollable-dropdown-menu {
+  width: 500px;
+  position: relative;
+  margin: auto;
+}
+/* --------------------------------------- */
+/* --------------------------------------- */
+/* custom */
+
+.tt-input,
+.tt-hint,
+.typeahead {
+  width: 500px;
+  font-size: var(--text-size);
+  font-weight: bold;
+  text-align: left;
+  padding: 5px 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+.tt-input {
+  box-shadow: var(--box-shadow);
+}
+
+.tt-hint {
+  color: var(--grey);
+}
+
+.tt-menu {
+  /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+  width: 500px;
+  margin-top: 12px;
+  padding: 8px 0;
+  font-size: var(--text-size);
+  text-align: left;
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: 20px;
+}
+
+.tt-suggestion {
+  padding: 5px 20px;
+}
+
+.tt-suggestion.tt-cursor {
+  /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+  color: #981b1b;
+  background-color: #0097cf;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+/* --------------------------------------- */
+/* --------------------------------------- */
+
+.search-icon {
+  position: absolute;
+  padding: 2px 5px;
+  left: 5px;
+}
+
+.datepicker {
+  font-size: var(--text-size);
+  text-align: center;
+  width: 130px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  box-shadow: var(--box-shadow);
+}
+
+.avatar {
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  width: 256px;
+  height: 256px;
+}
+
+.container-canvas {
+  display: inline-block;
+  position: relative;
+}
+.canvas {
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+}
+
+/* --------------------------------------------------------- */
+.footer {
+  background-color: var(--primary);
+  padding: var(--padding-y) var(--padding-x);
+  font-size: 12px;
+  color: var(--grey-light);
+}
+
+/* --------------------------------------------------------- */
+
+/* mobile: Portrait - under 768px
+   tablet: Portrait - between 768px and 1024px (in a rotation it definitly wil be above 1025px)
+   desktop: Landscape - above 1025px
+*/
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  :root {
+    --padding-x: 2rem;
+    --padding-y: 1rem;
+    --text-size-fake: 2rem;
+    --title-size: 2.5rem;
+  }
+  .main {
+    padding-top: 2rem;
+  }
+  .section {
+    margin-bottom: 1.5rem;
+  }
+  .input-search {
+    width: 65%;
+  }
+  .input-date {
+    width: 220px;
+  }
+  .avatar {
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    width: 300px;
+    height: 300px;
+  }
+  .buttons {
+    gap: 50px;
+  }
+  .clear-btn-fake {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: calc(-1rem - 50px);
+    left: calc(50% + 250px);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .input-search {
+    width: 35%;
+  }
+}
