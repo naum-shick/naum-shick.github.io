@@ -1,5 +1,5 @@
 function clearImage() {
-  $("#photo").attr("src", "default.jpg");
+  $("#photo").attr("src", "assets/images/default.png");
 }
 
 function clearEmployer() {
