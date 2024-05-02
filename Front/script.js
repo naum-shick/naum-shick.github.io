@@ -140,7 +140,7 @@ $(function () {
 async function saveSignature(shift) {
   const employee = $("#employeeList").val();
   if (employee.trim() == "") {
-    blurt("Please, enter employee name!", "", "warning");
+    blurt("Please, enter client's name!", "", "warning");
     return;
   }
 
@@ -196,7 +196,7 @@ async function saveSignature(shift) {
 function about() {
   blurt(
     "Signature",
-    "А вот это программу так еще не доделали Яна Шик и Наум Шик " +
+    "А вот это программу так еще не доделали Яна Шик и Наум Шик;  " +
       `innerWidth = ${window.innerWidth}`,
     "info"
   );
