@@ -1,8 +1,23 @@
-const RESIZE_WIDTH = 200;
+const RESIZE_WIDTH = 200; // max width for compress image
 
 function adjustCanvas(canvas) {
+  const oldH = canvas.height;
   const w = window.innerWidth > 850 ? 800 : window.innerWidth * 0.9;
-  const h = w / 2 > 300 ? 300 : w / 2;
+  let h = w / 2 > 300 ? 300 : w / 2;
+
+  //temporary hack for asus size; think about header/footer size dinamic
+  //console.log(`h start ${h}, innerH = ${window.innerHeight}, oldH = ${oldH}`);
+
+  const saveBottom = $(".save-btn").get(0).getBoundingClientRect().bottom;
+  const footerTop = $(".footer").get(0).getBoundingClientRect().top;
+
+  //console.log(`saveBottom = ${saveBottom},footerTop = ${footerTop} `);
+
+  if (saveBottom + 20 > footerTop) h = oldH - (saveBottom - footerTop + 20);
+  else h = Math.min(h, oldH - (saveBottom - footerTop + 20));
+
+  if (h < 50) h = 50;
+  //console.log(`h set ${h}`);
 
   canvas.setAttribute("width", w);
   canvas.setAttribute("height", h);
