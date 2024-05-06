@@ -40,6 +40,10 @@ canvas.addEventListener("touchcancel", () => stopDrawing());
 
 $("#clearCanvasBtn").on("click", () => clearCanvas(canvas, ctx));
 
+// block context menu on search icon
+$("#search-icon").on("contextmenu", (e) => searchIconContextMenu(e));
+$("#search-icon").on("touchstart", (e) => searchIconContextMenu(e));
+
 window.addEventListener("click", (e) => handleMenuClick(e, fetch_URL));
 
 // -----------------------------------------------------------------------------------------
@@ -222,4 +226,10 @@ async function makeGroup(fetch_URL) {
     console.log(data);
     blurt("Upss... error start make group", "", "error");
   }
+}
+
+//block ontext menu on searchIcon - simple set focus to list
+function searchIconContextMenu(e) {
+  $("#employeeList").focus();
+  e.preventDefault();
 }

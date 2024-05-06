@@ -51,6 +51,12 @@
   color: var(--text);
 }
 
+.header span img {
+  height: var(--title-size);
+  width: auto;
+  display: block;
+}
+
 /* --------------------------------------------------------- */
 .main {
   overflow: auto;

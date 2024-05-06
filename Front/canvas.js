@@ -6,7 +6,7 @@ function adjustCanvas(canvas) {
   let h = w / 2 > 300 ? 300 : w / 2;
 
   //temporary hack for asus size; think about header/footer size dinamic
-  //console.log(`h start ${h}, innerH = ${window.innerHeight}, oldH = ${oldH}`);
+  // console.log(`h start ${h}, innerH = ${window.innerHeight}, oldH = ${oldH}`);
 
   const saveBottom = $(".save-btn").get(0).getBoundingClientRect().bottom;
   const footerTop = $(".footer").get(0).getBoundingClientRect().top;
