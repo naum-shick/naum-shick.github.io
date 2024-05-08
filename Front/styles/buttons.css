@@ -20,10 +20,10 @@
   transition: background-color 0.2s;
 }
 .clear-btn:hover {
-  background-color: #f43f5e;
+  background-color: #ee546e;
 }
 .clear-btn:active {
-  background-color: #be123c;
+  background-color: #b5415e;
 }
 .clear-btn-icon {
   width: 20px;
@@ -101,4 +101,20 @@
 
 .bl-header {
   color: var(--primary);
+}
+
+/* --------------------------------------@MEDIA------------------------------------------------ */
+/* -------------------------------------------------------------------------------------------- */
+
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .buttons {
+    gap: 100px;
+  }
+}
+/* desktop */
+@media screen and (min-width: 1025px) {
+  .buttons {
+    gap: 100px;
+  }
 }

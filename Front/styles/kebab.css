@@ -15,7 +15,7 @@
   width: 6px; /*size of a dot*/
   height: 6px;
   border-radius: 5px;
-  background: #000000;
+  background: var(--dark);
   margin: 5px 16px; /*distance between dots*/
 }
 

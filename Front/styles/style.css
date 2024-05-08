@@ -3,20 +3,22 @@
 @import "./kebab.css";
 
 :root {
-  --primary: #1d4ed8;
-  --secondary: #3b82f6;
-  --secondary-light: #93c5fd;
+  /* --primary: #1d4ed8; */
+  --primary: #4f85c6;
+  /* --secondary: #3b82f6; */
+  --secondary: #72a2dd;
+  /* --secondary-light: #93c5fd; */
+  --secondary-light: #9cc3f0;
   --grey: #8997ab;
   --grey-light: #cbd5e1;
-  --grey-25: hsla(213, 27%, 84%, 0.25);
   --dark: #2a2e4e;
   --text: #ffffff;
   --box-shadow: rgba(0, 0, 0, 0.15) 0 4px 6px 3px;
 
-  --text-size: 1.25rem;
-  --title-size: 1.5rem;
+  --text-size: 1.25rem; /*20px*/
+  --title-size: 1.5rem; /*24px*/
 
-  --padding-x: 0.5rem;
+  --padding-x: 0.5rem; /*8px*/
   --padding-y: 0.5rem;
 
   --input-width: 80vw;
@@ -34,18 +36,17 @@
   display: grid;
   max-width: 100%;
   height: 100dvh;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto; /*auto-expand according to a content, 1fr- all remaining space */
 }
-
+/* -----------------------------HEADER------------------------------ */
 .header {
   background-color: var(--primary);
   display: flex;
   position: relative;
-  justify-content: space-between;
   align-items: center;
   gap: 6px;
   padding: var(--padding-y) var(--padding-x);
-  padding-top: calc(var(--padding-y) + calc(var(--padding-y) / 2));
+  padding-top: calc(var(--padding-y) * 1.5);
   font-size: var(--title-size);
   font-weight: bold;
   color: var(--text);
@@ -57,17 +58,17 @@
   display: block;
 }
 
-/* --------------------------------------------------------- */
+/* -----------------------------MAIN------------------------------ */
+
 .main {
-  overflow: auto;
+  overflow: hidden;
   text-align: center;
   padding: var(--padding-y) var(--padding-x);
-  padding-top: 1rem;
+  padding-top: calc(var(--padding-y) * 2);
   background-image: url("../assets/images/back-image.jpg");
   background-size: cover;
 }
 .section {
-  /* border: 1px solid rgb(124, 94, 94); */
   margin-bottom: 1rem;
   position: relative;
 }
@@ -87,7 +88,7 @@
   font-size: var(--text-size);
   font-weight: bold;
   text-align: left;
-  padding: 5px 40px;
+  padding: 5px 45px;
   border-radius: 20px;
   border: none;
   outline: none;
@@ -146,6 +147,7 @@
   border: none;
   outline: none;
   box-shadow: var(--box-shadow);
+  color: var(--dark);
 }
 
 .avatar {
@@ -165,15 +167,17 @@
   box-shadow: var(--box-shadow);
 }
 
-/* --------------------------------------------------------- */
+/* -----------------------------FOOTER------------------------------ */
+
 .footer {
   background-color: var(--primary);
   padding: var(--padding-y) var(--padding-x);
-  font-size: 12px;
+  font-size: 0.75rem; /*12px*/
   color: var(--grey-light);
 }
 
-/* --------------------------------------------------------- */
+/* --------------------------------------@MEDIA------------------------------------------------ */
+/* -------------------------------------------------------------------------------------------- */
 
 /* mobile: Portrait - under 768px
    tablet: Portrait - between 768px and 1024px (in a rotation it definitly wil be above 1025px)
@@ -188,7 +192,7 @@
     --title-size: 1.85rem;
   }
   .main {
-    padding-top: 2rem;
+    padding-top: calc(var(--padding-y) * 1.5);
   }
   .section {
     margin-bottom: 1.5rem;
@@ -199,10 +203,6 @@
     box-shadow: var(--box-shadow);
     width: 256px;
     height: 256px;
-  }
-
-  .buttons {
-    gap: 50px;
   }
 
   .clear-btn-fake {
@@ -217,10 +217,17 @@
 /* desktop */
 @media screen and (min-width: 1025px) {
   :root {
+    --padding-x: 2rem;
+    --padding-y: 1rem;
     --title-size: 1.85rem;
     --input-width: 500px;
   }
-
+  .main {
+    padding-top: calc(var(--padding-y) * 1.5);
+  }
+  .section {
+    margin-bottom: 1.5rem;
+  }
   .avatar {
     border-radius: 20px;
     box-shadow: var(--box-shadow);
