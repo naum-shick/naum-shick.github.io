@@ -41,8 +41,10 @@ canvas.addEventListener("touchcancel", () => stopDrawing());
 $("#clearCanvasBtn").on("click", () => clearCanvas(canvas, ctx));
 
 // block context menu on search icon
-$("#search-icon").on("contextmenu", (e) => searchIconContextMenu(e));
-$("#search-icon").on("touchstart", (e) => searchIconContextMenu(e));
+// $("#search-icon").on("contextmenu", (e) => searchIconContextMenu(e));
+// $("#search-icon").on("touchstart", (e) => searchIconContextMenu(e));
+
+$("body").on("contextmenu", () => false);
 
 window.addEventListener("click", (e) => handleMenuClick(e, fetch_URL));
 
