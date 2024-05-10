@@ -221,7 +221,7 @@ async function makeGroup(fetch_URL) {
   const data = await res.json();
   $(".loader").hide();
   if (data.result === "success") {
-    blurt("Group Sheet start successfully", "", "success");
+    blurt("Group/Calendar start successfully", "", "success");
 
     ////console.log(data);
   } else {
