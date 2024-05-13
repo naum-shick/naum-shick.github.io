@@ -11,7 +11,7 @@
  * @author Yana Shick, Naum Shick
  *
  * Created at     : 2024-03-14
- * Last modified  : 2024-03-19
+ * Last modified  : 2024-05-14
  */
 
 // make fetch url from command line
@@ -52,8 +52,22 @@ window.addEventListener("click", (e) => handleMenuClick(e, fetch_URL));
 // -----------------------------------------------------------------------------------------
 window.addEventListener("load", getList);
 
-let nameImages;
+let nameImages; // global name list + images id
 
+let lastDateTime = Math.floor(Date.now() / (3600 * 24 * 1000)); // date only last start of check
+setInterval(timerCheckChangeDateReload, 2000);
+
+// check - may be, now next day (after sleep?)
+function timerCheckChangeDateReload() {
+  var dat = Math.floor(Date.now() / (3600 * 24 * 1000)); // date only last start of check
+
+  if (dat > lastDateTime) {
+    // if next day - reload
+    location.reload();
+  }
+}
+
+// get names list
 async function getList() {
   const formData = new FormData();
   formData.append("getList", "getList");
