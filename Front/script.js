@@ -199,7 +199,7 @@ async function saveSignature(shift) {
 
   const data = await res.json();
   $(".loader").hide();
-  if (data.result === "success") {
+  if (data.status === "success") {
     blurt("Signature is done successfully", "", "success");
 
     clearEmployer();
@@ -234,8 +234,8 @@ async function makeGroup(fetch_URL) {
 
   const data = await res.json();
   $(".loader").hide();
-  if (data.result === "success") {
-    blurt("Group/Calendar start successfully", "", "success");
+  if (data.status === "success") {
+    blurt("Group/Calendar/Individual start successfully", "", "success");
 
     ////console.log(data);
   } else {
