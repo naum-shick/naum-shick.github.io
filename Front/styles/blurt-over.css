@@ -1,0 +1,50 @@
+/* blurt override css */
+
+.bl-box .bl-info,
+.bl-box .bl-warning {
+  border-top-color: white;
+  border-top: none;
+}
+.bl-box .bl-info button,
+.bl-box .bl-warning button {
+  background-color: var(--primary-btn);
+}
+
+.bl-box .bl-info button:hover,
+.bl-box .bl-warning button:hover {
+  background-color: var(--secondary-btn);
+  color: var(--text);
+}
+.bl-box .bl-info button:active,
+.bl-box .bl-warning button:active {
+  color: var(--dark);
+}
+
+.bl-box button {
+  border-radius: 20px;
+  border-radius: 20px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: var(--text-size);
+  font-weight: bold;
+  /* justify-content: center; */
+  padding: 5px 24px;
+  text-align: center;
+  text-decoration: none;
+  border: 0;
+  white-space: nowrap;
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.2s;
+  transition: color;
+}
+
+.bl-box .bl-dialog {
+  border-radius: 20px;
+}
+.bl-box .bl-content {
+  padding: 20px;
+}
+
+.bl-header {
+  color: var(--primary);
+}

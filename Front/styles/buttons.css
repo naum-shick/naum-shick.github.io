@@ -5,25 +5,27 @@
   height: 40px;
   background-color: #fda4af;
   border-radius: 20px;
-  color: var(--dark);
+  /* color: var(--dark); */
   cursor: pointer;
   border: 0;
   box-shadow: var(--box-shadow);
   position: absolute;
-
   top: 5px;
   right: 5px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s;
+  scale: 1;
+
+  transition: background-color, scale 0.2s;
 }
+
 .clear-btn:hover {
-  background-color: #ee546e;
+  scale: 1.1;
+  background-color: hwb(350 39% 7%);
 }
 .clear-btn:active {
-  background-color: #b5415e;
+  background-color: hwb(350 18% 2%);
 }
 .clear-btn-icon {
   width: 20px;
@@ -36,7 +38,7 @@
 }
 .save-btn {
   /* align-items: center; */
-  background-color: var(--primary);
+  background-color: var(--primary-btn);
   border-radius: 20px;
   color: var(--text);
   cursor: pointer;
@@ -49,58 +51,16 @@
   border: 0;
   white-space: nowrap;
   box-shadow: var(--box-shadow);
-  transition: background-color 0.2s;
+  scale: 1;
+  transition: background-color, scale 0.2s;
+  transition: color;
 }
 .save-btn:hover {
-  background-color: var(--secondary);
+  scale: 1.1;
+  background-color: var(--secondary-btn);
 }
 .save-btn:active {
-  background-color: var(--secondary-light);
-}
-
-/* blurt override css */
-.bl-box .bl-info {
-  border-top-color: white;
-}
-.bl-box .bl-info button {
-  background-color: var(--primary);
-}
-
-.bl-box .bl-info button:hover {
-  background-color: var(--secondary);
-  color: var(--text);
-}
-.bl-box .bl-info button:active {
-  background-color: var(--secondary-light);
-  color: var(--text);
-}
-
-.bl-box button {
-  border-radius: 20px;
-  border-radius: 20px;
-  color: var(--text);
-  cursor: pointer;
-  font-size: var(--text-size);
-  font-weight: bold;
-  /* justify-content: center; */
-  padding: 5px 24px;
-  text-align: center;
-  text-decoration: none;
-  border: 0;
-  white-space: nowrap;
-  box-shadow: var(--box-shadow);
-  /* transition: background-color 0.2s; */
-}
-
-.bl-box .bl-dialog {
-  border-radius: 20px;
-}
-.bl-box .bl-content {
-  padding: 20px;
-}
-
-.bl-header {
-  color: var(--primary);
+  color: var(--dark);
 }
 
 /* --------------------------------------@MEDIA------------------------------------------------ */

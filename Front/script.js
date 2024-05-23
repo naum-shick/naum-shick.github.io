@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2024
- *
+
  * Script for:
  * - get namelist from google sheet (publish script)
  * - select name
@@ -167,32 +167,38 @@ async function saveSignature(shift) {
 
   const formData = new FormData();
   formData.append("Signature", dataURL);
-
   formData.append("Employee", employee);
-
   const signDate = $("#datepicker").val(); // string with original format
-
   formData.append("SignDate", signDate);
-
   formData.append("Shift", shift);
 
-  const res = await fetch(fetch_URL, {
-    method: "POST",
-    body: formData,
-  });
+  try {
+    const res = await fetch(fetch_URL, {
+      method: "POST",
+      body: formData,
+    });
 
-  const data = await res.json();
-  $(".loader").hide();
-  if (data.result === "success") {
-    blurt("Signature is done successfully", "", "success");
+    const data = await res.json();
+    $(".loader").hide();
 
-    clearEmployer();
-    clearCanvas(canvas, ctx);
-    clearImage();
+    if (data.result === "success") {
+      // blurt("Signature is done successfully", "", "success");
 
-    ////console.log(data);
-  } else {
-    console.log(data);
+      // instead of the blurt message:
+      $(".done-message").addClass("show");
+      setTimeout(() => {
+        $(".done-message").removeClass("show");
+      }, 5000);
+
+      clearEmployer();
+      clearCanvas(canvas, ctx);
+      clearImage();
+      ////console.log(data);
+    } else {
+      console.log(data);
+      blurt("Upss... error save signature", "", "error");
+    }
+  } catch (error) {
     blurt("Upss... error save signature", "", "error");
   }
 }

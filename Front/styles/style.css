@@ -1,14 +1,13 @@
 @import "./loader.css";
 @import "./buttons.css";
 @import "./kebab.css";
+@import "./blurt-over.css";
 
 :root {
-  /* --primary: #1d4ed8; */
   --primary: #4f85c6;
-  /* --secondary: #3b82f6; */
   --secondary: #72a2dd;
-  /* --secondary-light: #93c5fd; */
-  --secondary-light: #9cc3f0;
+  --primary-btn: #266ec6;
+  --secondary-btn: #1d4ed8;
   --grey: #8997ab;
   --grey-light: #cbd5e1;
   --dark: #2a2e4e;
@@ -44,18 +43,17 @@
   display: flex;
   position: relative;
   align-items: center;
-  gap: 6px;
-  padding: var(--padding-y) var(--padding-x);
-  padding-top: calc(var(--padding-y) * 1.5);
+  gap: 8px;
+  padding: var(--padding-y);
+  padding-right: var(--padding-x);
   font-size: var(--title-size);
   font-weight: bold;
   color: var(--text);
 }
 
 .header span img {
-  height: var(--title-size);
-  width: auto;
   display: block;
+  width: 42px;
 }
 
 /* -----------------------------MAIN------------------------------ */
@@ -174,8 +172,29 @@
   padding: var(--padding-y) var(--padding-x);
   font-size: 0.75rem; /*12px*/
   color: var(--grey-light);
+  display: flex;
+  justify-content: space-between;
 }
-
+.copyright {
+  align-content: center;
+}
+.done-message {
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-size);
+  transition: opacity 0.2s, visibility 0ms 0.2s;
+}
+.done-message.show {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0ms;
+}
+.done-message span {
+  color: #43ff43;
+}
 /* --------------------------------------@MEDIA------------------------------------------------ */
 /* -------------------------------------------------------------------------------------------- */
 
@@ -194,6 +213,16 @@
   .main {
     padding-top: calc(var(--padding-y) * 1.5);
   }
+
+  .header {
+    padding: calc(var(--padding-y) / 2);
+    gap: 16px;
+  }
+
+  .header span img {
+    width: 62px;
+  }
+
   .section {
     margin-bottom: 1.5rem;
   }
@@ -212,6 +241,9 @@
     top: calc(-1rem - 50px);
     left: calc(50% + 250px);
   }
+  .footer {
+    padding: calc(var(--padding-y) / 2);
+  }
 }
 
 /* desktop */
@@ -225,6 +257,14 @@
   .main {
     padding-top: calc(var(--padding-y) * 1.5);
   }
+  .header span img {
+    width: 62px;
+  }
+  .header {
+    padding: calc(var(--padding-y) / 2);
+    gap: 16px;
+  }
+
   .section {
     margin-bottom: 1.5rem;
   }
@@ -233,5 +273,8 @@
     box-shadow: var(--box-shadow);
     width: 256px;
     height: 256px;
+  }
+  .footer {
+    padding: calc(var(--padding-y) / 2);
   }
 }
