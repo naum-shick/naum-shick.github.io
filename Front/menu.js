@@ -8,7 +8,7 @@ function closeMenu() {
   if ($(".dropdown").hasClass("active")) toggle(); // turn off
 }
 
-function handleMenuClick(e, fetch_URL) {
+async function handleMenuClick(e, fetch_URL) {
   //todoL: to function
   //console.log(e.target.classList);
   if (e.target.classList.contains("no-close-menu")) {
@@ -22,6 +22,6 @@ function handleMenuClick(e, fetch_URL) {
   if (e.target.id == "menuMakeGroup") {
     makeGroup(fetch_URL);
   } else if (e.target.id == "menuAbout") {
-    about();
+    await about();
   }
 }

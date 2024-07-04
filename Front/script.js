@@ -129,19 +129,38 @@ function namesMatcher(listNames) {
         source: substringMatcher(listNames),
       }
     )
-    .bind("typeahead:selected", function (_obj, datum, _name) {
-      $("#employeeList").blur();
+    .bind("typeahead:selected", function (_obj, _datum, _name) {
+      $("#employeeList").blur(); // make lost focus
+      //setImage(datum);
+    })
+
+    .bind("typeahead:change", function (_obj, datum, _name) {
       setImage(datum);
     });
 }
+
+/**
+ * Try set image by name; if name empty - clear; not found - new name
+ * Image - from url
+ * @param {String} name - name of user (Ivan Rabinovich)
+ */
 function setImage(name) {
-  const ni = nameImages.find((x) => x.name == name);
-  if (ni.imageId != undefined) {
-    const url = imageUrl.replace("#", ni.imageId);
-    ////console.log(url);
-    $("#photo").attr("src", url);
-  } else {
+  if (!name) {
     clearImage();
+  } else {
+    const ni = nameImages.find((x) => x.name == name);
+    if (!ni) {
+      //names not exist
+      setNewNameImage();
+    } else if (!ni.imageId) {
+      // names exist - not exist image in server
+      clearImage();
+    } else {
+      //exist image - set it
+      const url = imageUrl.replace("#", ni.imageId);
+      ////console.log(url);
+      $("#photo").attr("src", url);
+    }
   }
 }
 // ----------------------------------------------------------------------
@@ -157,24 +176,38 @@ $(function () {
     .datepicker("setDate", "0d"); // today
 });
 
+/**
+ * Save in google tables user/signature/shift
+ * @param {int} shift
+ * @returns
+ */
 async function saveSignature(shift) {
   const employee = $("#employeeList").val();
+
   if (employee.trim() == "") {
-    blurt("Please, enter client's name!", "", "warning");
+    await msgWarning("Please, enter client's name!");
     return;
   }
 
-  //todo: if name empty - create message, exit
+  let isInList = true;
+  if (!nameImages.some((x) => x.name == employee)) {
+    isInList = false;
+    if (
+      !(await msgConfirm("This name is not on the main list. Are you sure?"))
+    ) {
+      return;
+    }
+  }
+
   // resize image
   const rs = resizeCanvas(canvas);
   const tr = trimCanvas(rs);
 
+  //if canvas empty - create message, exit
   if (!tr) {
-    blurt("Please sign!", "", "warning");
+    await msgWarning("Please sign!");
     return;
   }
-
-  //if canvas empty - create message, exit
 
   $(".loader").show();
   const dataURL = tr.toDataURL("image/png");
@@ -192,6 +225,8 @@ async function saveSignature(shift) {
 
   formData.append("Shift", shift);
 
+  formData.append("InList", isInList);
+
   const res = await fetch(fetch_URL, {
     method: "POST",
     body: formData,
@@ -200,7 +235,7 @@ async function saveSignature(shift) {
   const data = await res.json();
   $(".loader").hide();
   if (data.status === "success") {
-    blurt("Signature is done successfully", "", "success");
+    await msgOk("Signature is done successfully");
 
     clearEmployer();
     clearCanvas(canvas, ctx);
@@ -209,16 +244,13 @@ async function saveSignature(shift) {
     ////console.log(data);
   } else {
     console.log(data);
-    blurt("Upss... error save signature", "", "error");
+    await msgError("Upss... error save signature");
   }
 }
 
-function about() {
-  blurt(
-    "Signature",
-    "А вот это программу продолжают модифицировать Яна Шик и Наум Шик;  " +
-      `innerWidth = ${window.innerWidth}`,
-    "info"
+async function about() {
+  await msgOk(
+    "А вот это программу продолжают модифицировать Яна Шик и Наум Шик"
   );
 }
 
@@ -235,12 +267,12 @@ async function makeGroup(fetch_URL) {
   const data = await res.json();
   $(".loader").hide();
   if (data.status === "success") {
-    blurt("Group/Calendar/Individual start successfully", "", "success");
+    await msgOk("Group/Calendar/Individual start successfully");
 
     ////console.log(data);
   } else {
     console.log(data);
-    blurt("Upss... error start make group", "", "error");
+    await msgError("Upss... error start make group");
   }
 }
 
