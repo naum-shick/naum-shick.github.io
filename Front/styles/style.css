@@ -1,17 +1,21 @@
 @import "./loader.css";
 @import "./buttons.css";
 @import "./kebab.css";
+@import "./sweet-alert.css";
 
 :root {
   /* --primary: #1d4ed8; */
   --primary: #4f85c6;
   /* --secondary: #3b82f6; */
   --secondary: #72a2dd;
+  --primary-btn: #266ec6;
+  --secondary-btn: #1d4ed8;
   /* --secondary-light: #93c5fd; */
   --secondary-light: #9cc3f0;
   --secondary-dark: #2961a6;
   --grey: #8997ab;
   --grey-light: #cbd5e1;
+  --grey-dark: #737a84;
   --dark: #2a2e4e;
   --text: #ffffff;
   --box-shadow: rgba(0, 0, 0, 0.15) 0 4px 6px 3px;

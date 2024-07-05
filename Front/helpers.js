@@ -13,21 +13,35 @@ function clearEmployer() {
 async function msgOk(txt) {
   await Swal.fire({
     title: txt,
-    //text: "Little font text",
-    icon: "success",
+    imageUrl: "./assets/images/success-96.png",
+    customClass: {
+      confirmButton: "save-btn",
+    },
+    buttonsStyling: false,
+    color: "#4f85c6",
   });
 }
 
 async function msgWarning(txt) {
   await Swal.fire({
     title: txt,
-    icon: "warning",
+    imageUrl: "./assets/images/warning-96.png",
+    customClass: {
+      confirmButton: "save-btn",
+    },
+    buttonsStyling: false,
+    color: "#4f85c6",
   });
 }
 async function msgError(txt) {
   await Swal.fire({
     title: txt,
-    icon: "error",
+    imageUrl: "./assets/images/error-96.png",
+    customClass: {
+      confirmButton: "save-btn",
+    },
+    color: "red",
+    buttonsStyling: false,
   });
 }
 
@@ -35,10 +49,14 @@ async function msgConfirm(txt) {
   return await Swal.fire({
     title: txt,
     //text: txt,
-    icon: "warning",
+    imageUrl: "./assets/images/question-96.png",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
+    customClass: {
+      confirmButton: "save-btn",
+      cancelButton: "save-btn cancel",
+    },
+    buttonsStyling: false,
+    color: "red",
     confirmButtonText: "Yes, it's new name",
     cancelButtonText: "No",
   }).then((result) => result.isConfirmed);

@@ -36,7 +36,7 @@
 }
 .save-btn {
   /* align-items: center; */
-  background-color: var(--secondary-dark);
+  background-color: var(--primary-btn);
   border-radius: 20px;
   color: var(--text);
   cursor: pointer;
@@ -51,56 +51,22 @@
   box-shadow: var(--box-shadow);
   transition: background-color 0.2s;
 }
+.save-btn.cancel {
+  background-color: var(--grey);
+}
 .save-btn:hover {
-  background-color: var(--secondary);
+  background-color: var(--secondary-btn);
+}
+.save-btn.cancel:hover {
+  background-color: var(--grey-dark);
 }
 .save-btn:active {
-  background-color: var(--secondary-light);
+  color: var(--dark);
+  background-color: var(--secondary-btn);
 }
-
-/* blurt override css */
-.bl-box .bl-info {
-  border-top-color: white;
-}
-.bl-box .bl-info button {
-  background-color: var(--primary);
-}
-
-.bl-box .bl-info button:hover {
-  background-color: var(--secondary);
-  color: var(--text);
-}
-.bl-box .bl-info button:active {
-  background-color: var(--secondary-light);
-  color: var(--text);
-}
-
-.bl-box button {
-  border-radius: 20px;
-  border-radius: 20px;
-  color: var(--text);
-  cursor: pointer;
-  font-size: var(--text-size);
-  font-weight: bold;
-  /* justify-content: center; */
-  padding: 5px 24px;
-  text-align: center;
-  text-decoration: none;
-  border: 0;
-  white-space: nowrap;
-  box-shadow: var(--box-shadow);
-  /* transition: background-color 0.2s; */
-}
-
-.bl-box .bl-dialog {
-  border-radius: 20px;
-}
-.bl-box .bl-content {
-  padding: 20px;
-}
-
-.bl-header {
-  color: var(--primary);
+.save-btn.cancel:active {
+  color: var(--dark);
+  background-color: var(--grey-dark);
 }
 
 /* --------------------------------------@MEDIA------------------------------------------------ */
